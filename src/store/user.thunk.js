@@ -1,13 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { _getUsers } from "../api/_DATA";
+import { _getUsers, _saveUser } from "../api/_DATA";
 
+//login
 export const login = createAsyncThunk("/login", async (user) => {
   const { username, password } = user;
   let response = {};
   await _getUsers().then((users) => {
     const currentUser = users[username];
     if (currentUser) {
-      //have user
       if (currentUser.password === password) {
         //correct password
         response.user = currentUser;
@@ -18,6 +18,19 @@ export const login = createAsyncThunk("/login", async (user) => {
     } else {
       // cannot find user
       response.error = { code: "username" };
+    }
+  });
+  return response;
+});
+
+//signup
+export const signup = createAsyncThunk("/signup", async (user) => {
+  let response = {};
+  await _saveUser(user).then((newUser) => {
+    if (newUser) {
+      response.user = newUser;
+    } else {
+      response.error = { code: "signup" };
     }
   });
   return response;

@@ -8,10 +8,19 @@ export const ERROR = {
 export const MESSAGES = {
   LOGIN_SUCCESS: "Logged in successfully. Hang on while we redirect you ...",
   LOGIN_USERNAME_ERROR: "We cannot find the user",
-  LOGIN_PASSWORD_ERROR: "We cannot find the user",
+  LOGIN_PASSWORD_ERROR: "Incorrect password",
   SIGNUP_SUCCESS: "Signed up successfully. Hang on while we redirect you ...",
+  SIGNUP_ERROR: "Try again",
   LOGIN_ALREADY_HAVE_ACCOUNT: "Do not have an account? Sign up instead",
   SIGNUP_ALREADY_HAVE_ACCOUNT: "Already have an account? Log in instead",
+};
+
+export const toObject = (fieldArray) => {
+  return fieldArray.map((field) => ({
+    name: field,
+    value: "",
+    touched: false,
+  }));
 };
 
 export const updateInputInfo = (event, input) => {
