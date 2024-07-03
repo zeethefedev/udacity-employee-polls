@@ -13,7 +13,6 @@ function Navbar({ user }) {
     dispatch(logout());
   };
 
-  const handleNavigate = () => {};
   return (
     <div className="flex">
       {PAGES.map((page) => (
