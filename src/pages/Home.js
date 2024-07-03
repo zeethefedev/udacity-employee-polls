@@ -1,21 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Dashboard from "../components/home/Dashboard";
-import Button from "../components/generics/Button";
-import { useDispatch } from "react-redux";
-import { logout } from "../store/user.reducer";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllQuestions } from "../store/question.thunk";
 
 function Home() {
   const dispatch = useDispatch();
-  const handleLogout = () => {
-    dispatch(logout());
+  const questions = useSelector((state) => state.question.questions);
+  const getQuestions = () => {
+    dispatch(getAllQuestions());
   };
 
-  return (
-    <div>
-      <Button onClick={handleLogout}>Log out</Button>
-      <Dashboard />
-    </div>
-  );
+  useEffect(() => {
+    getQuestions();
+  }, []);
+
+  return <>{questions && <Dashboard questions={questions} />}</>;
 }
 
 export default Home;
