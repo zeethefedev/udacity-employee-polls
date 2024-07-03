@@ -40,11 +40,18 @@ function Form(props) {
     return !input.value && input.touched && ERROR[code];
   };
 
+  const typeField = (input) => {
+    const inputName = input.name;
+    if (inputName.includes("name")) return "text";
+    else if (inputName.includes("password")) return "password";
+    else return input.name;
+  };
+
   return (
     <form className="flex flex-col gap-4 max-w-md m-auto rounded items-center p-8 border-2 border-solid">
       {inputGroup.map((input) => (
         <Input
-          type={input.name.includes("name") ? "text" : input.name}
+          type={typeField(input)}
           label={`${input.name.replaceAll("-", " ")}: `}
           name={input.name}
           value={input.value}

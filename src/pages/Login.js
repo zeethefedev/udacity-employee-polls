@@ -3,9 +3,10 @@ import LoginSignupForm from "../components/login-signup/LoginSignupForm";
 
 function Login() {
   return (
-    <div>
-      <LoginSignupForm />
-    </div>
+    <>
+      <h1>Login</h1>
+      <LoginSignupForm initialInputs={["username", "password"]} />
+    </>
   );
 }
 
