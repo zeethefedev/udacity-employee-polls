@@ -1,10 +1,11 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
-import { login } from "./user.thunk";
+import { getAllUsers, login } from "./user.thunk";
 import { MESSAGES } from "../utils/utils.login";
 
 export const userSlice = createSlice({
   name: "user",
   initialState: {
+    users: [],
     info: undefined,
     error: false,
     loading: false,
@@ -36,6 +37,15 @@ export const userSlice = createSlice({
         } else {
           state.info = user;
           state.message = MESSAGES.LOGIN_SUCCESS;
+        }
+        state.loading = false;
+      })
+      .addCase(getAllUsers.fulfilled, (state, action) => {
+        const { users, error } = action.payload;
+        if (error) {
+          state.error = true;
+        } else {
+          state.users = users;
         }
         state.loading = false;
       })

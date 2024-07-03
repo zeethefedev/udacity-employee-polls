@@ -22,3 +22,17 @@ export const login = createAsyncThunk("/login", async (user) => {
   });
   return response;
 });
+
+export const getAllUsers = createAsyncThunk("/get-users", async () => {
+  let response = {};
+  await _getUsers()
+    .then((users) => {
+      debugger;
+      const userList = Object.values(users);
+      response.users = userList;
+    })
+    .catch((error) => {
+      response.error = error;
+    });
+  return response;
+});
