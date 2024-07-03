@@ -5,12 +5,15 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import LeaderBoard from "./pages/LeaderBoard";
 import Add from "./pages/Add";
+import { useSelector } from "react-redux";
 
 function App() {
+  const currentUser = useSelector((state) => state.user.info);
+
   return (
     <div className="App">
       <Routes>
-        <Route exact path="/" element={<Home />} />
+        <Route exact path="/" element={currentUser ? <Home /> : <Login />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route path="leaderboard" element={<LeaderBoard />} />

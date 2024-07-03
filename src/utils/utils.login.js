@@ -1,21 +1,17 @@
 export const ERROR = {
-  EMAIL: "Email must contain @",
-  PASSWORD: "Password must have more than 5 chars and contains a number",
-  CONFIRM_PASSWORD: "Password must be the same",
+  USERNAME: "Invalid username",
+  PASSWORD: "Invalid email",
   LOGIN: "Invalid email",
   SIGNUP: "Invalid email",
 };
 
 export const MESSAGES = {
   LOGIN_SUCCESS: "Logged in successfully. Hang on while we redirect you ...",
-  LOGIN_GOOGLE_SUCCESS:
-    "Logged in with Google successfully. Hang on while we redirect you ...",
+  LOGIN_USERNAME_ERROR: "We cannot find the user",
+  LOGIN_PASSWORD_ERROR: "We cannot find the user",
   SIGNUP_SUCCESS: "Signed up successfully. Hang on while we redirect you ...",
   LOGIN_ALREADY_HAVE_ACCOUNT: "Do not have an account? Sign up instead",
   SIGNUP_ALREADY_HAVE_ACCOUNT: "Already have an account? Log in instead",
-  CHANGE_PASSWORD_SUCCESS:
-    "Password changed successfully! Hang on while we redirect you ...",
-  RESET_PASSWORD_SUCCESS: "Password reset email sent! Please check your inbox",
 };
 
 export const updateInputInfo = (event, input) => {
@@ -37,8 +33,7 @@ export const setTouchedInfo = (input) => {
 
 export const setButtonDisabled = (input) => {
   const buttonDisabled =
-    input.every((inp) => inp.touched) &&
-    (input.some((inp) => !inp.value) || !validateForm(input));
+    input.every((inp) => inp.touched) && input.some((inp) => !inp.value);
   return buttonDisabled;
 };
 
@@ -64,8 +59,8 @@ export const validateConfirmPassword = (input) => {
   return confirmPassword === newPassword;
 };
 
-export const validateForm = (input) => {
-  const validFields = input.map((inp) =>
+export const validateForm = (inputs) => {
+  const validFields = inputs.map((inp) =>
     inp.name === "email"
       ? validateEmail(inp.value)
       : validatePassword(inp.value)
