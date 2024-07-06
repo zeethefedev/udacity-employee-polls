@@ -1,26 +1,31 @@
 import React, { useState } from "react";
 import QuestionCard from "./QuestionCard";
 import Input from "../generics/Input";
+import { Outlet, useLocation } from "react-router-dom";
 
 function QuestionList({ questions }) {
   const [active, setActive] = useState();
   const handleSetActive = (question) => {
-    if (active === null || active === undefined) {
-      setActive(question.id);
-    } else {
-      setActive();
-    }
+    setActive(question);
   };
+
+  const location = useLocation();
+  const isQuestionDetailScreen = location.pathname.includes("question");
 
   return (
     <>
-      {questions.map((question) => (
-        <QuestionCard
-          question={question}
-          handleSetActive={() => handleSetActive(question)}
-          active={question.id === active}
-        />
-      ))}
+      {isQuestionDetailScreen ? (
+        <Outlet context={active} />
+      ) : (
+        <>
+          {questions.map((question) => (
+            <QuestionCard
+              question={question}
+              handleSetActive={() => handleSetActive(question)}
+            />
+          ))}
+        </>
+      )}
     </>
   );
 }

@@ -7,6 +7,7 @@ import LeaderBoard from "./pages/LeaderBoard";
 import Add from "./pages/Add";
 import { useSelector } from "react-redux";
 import Navbar from "./components/Navbar";
+import QuestionDetail from "./components/home/QuestionDetail";
 
 function App() {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -17,7 +18,9 @@ function App() {
       <Navbar user={currentUser} />
       <Routes>
         {/* <Route exact path="/" element={currentUser ? <Home /> : <Login />} /> */}
-        <Route exact path="/" element={<Home />} />
+        <Route exact path="/" element={<Home />}>
+          <Route path="question/:id" element={<QuestionDetail />} />
+        </Route>
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route path="leaderboard" element={<LeaderBoard />} />

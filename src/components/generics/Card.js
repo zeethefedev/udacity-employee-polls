@@ -1,8 +1,11 @@
 import React from "react";
 
-function Card({ children }) {
+function Card({ children, className, onClick }) {
   return (
-    <div className="flex flex-col gap-4 max-w-md m-auto rounded items-center p-8 border-2 border-solid">
+    <div
+      className={`flex flex-col gap-4 max-w-md m-auto rounded items-center p-8 border-2 border-solid ${className}`}
+      onClick={onClick}
+    >
       {children}
     </div>
   );

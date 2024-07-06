@@ -1,10 +1,11 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
-import { getAllQuestions } from "./question.thunk";
+import { getAllQuestions, getQuestionById } from "./question.thunk";
 
 export const questionSlice = createSlice({
   name: "question",
   initialState: {
     questions: [],
+    currentQuestion: undefined,
     error: false,
     loading: false,
     message: "",
@@ -16,18 +17,28 @@ export const questionSlice = createSlice({
         const { questions, error } = action.payload;
         if (error) {
           state.error = true;
-          // state.message = MESSAGES[`LOGIN_${error.code.toUpperCase()}_ERROR`];
         } else {
           state.questions = questions;
-          // state.message = MESSAGES.LOGIN_SUCCESS;
         }
         state.loading = false;
       })
-      .addMatcher(isAnyOf(getAllQuestions.pending), (state) => {
-        state.error = false;
-        state.message = "";
-        state.loading = true;
-      });
+      .addCase(getQuestionById.fulfilled, (state, action) => {
+        const { question, error } = action.payload;
+        if (error) {
+          state.error = true;
+        } else {
+          state.currentQuestion = question;
+        }
+        state.loading = false;
+      })
+      .addMatcher(
+        isAnyOf(getAllQuestions.pending, getQuestionById.pending),
+        (state) => {
+          state.error = false;
+          state.message = "";
+          state.loading = true;
+        }
+      );
   },
 });
 
