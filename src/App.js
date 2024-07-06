@@ -13,7 +13,8 @@ function App() {
 
   return (
     <div className="App">
-      {currentUser && <Navbar user={currentUser} />}
+      {/* {currentUser && <Navbar user={currentUser} />} */}
+      <Navbar user={currentUser} />
       <Routes>
         {/* <Route exact path="/" element={currentUser ? <Home /> : <Login />} /> */}
         <Route exact path="/" element={<Home />} />

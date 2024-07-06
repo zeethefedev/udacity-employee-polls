@@ -57,6 +57,16 @@ input {
   font-weight: 500;
 }
 
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+}
+
+input[type="checkbox"]:checked {
+  background: url("/public/icon/check.svg") no-repeat center / 100% auto;
+  background-color: var(--green);
+}
+
 button:hover,
 button:focus,
 .input-wrapper:hover,
@@ -115,7 +125,8 @@ label {
   font-weight: 500;
 }
 
-form {
+form,
+nav {
   background-color: var(--background);
 }
 

@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "../generics/Card";
 import Button from "../generics/Button";
 
 function QuestionCard({ question, active, handleSetActive }) {
-  const { author, optionOne, optionTwo } = question;
-  const handleSetAnswer = (option) => {};
+  const { author, timestamp, optionOne, optionTwo } = question;
+  const handleSetAnswer = () => {
+    // setShowOption(!showOption)
+  };
+
   return (
     <Card>
       <div>Would your rather...</div>
-      <div>Create by {author} </div>
-      <div onClick={handleSetActive}>Start vote</div>
+      <div>
+        Create by {author} on {new Date(timestamp).toLocaleString()}
+      </div>
+      <Button onClick={handleSetActive}>Start vote</Button>
       {active && (
         <>
           <Button onClick={() => handleSetAnswer(optionOne)}>

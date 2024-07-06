@@ -6,6 +6,8 @@ import { getAllQuestions } from "../store/question.thunk";
 function Home() {
   const dispatch = useDispatch();
   const questions = useSelector((state) => state.question.questions);
+  const currentUser = useSelector((state) => state.user.currentUser);
+
   const getQuestions = () => {
     dispatch(getAllQuestions());
   };
@@ -14,7 +16,9 @@ function Home() {
     getQuestions();
   }, []);
 
-  return <>{questions && <Dashboard questions={questions} />}</>;
+  return (
+    <>{questions && <Dashboard questions={questions} user={currentUser} />}</>
+  );
 }
 
 export default Home;

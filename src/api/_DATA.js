@@ -167,7 +167,7 @@ function formatUser({ username, displayName, password }) {
   return {
     id: username,
     password,
-    displayName,
+    name: displayName,
     avatarURL: null,
     answers: {},
     questions: [],

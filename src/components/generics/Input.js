@@ -6,6 +6,7 @@ function Input(props) {
   const {
     type = "text",
     value,
+    checked,
     required = true,
     name,
     label,
@@ -14,6 +15,7 @@ function Input(props) {
     error,
     onChange,
     showForgotPassword,
+    inputClass = "w-full",
   } = props;
 
   const [showPassword, setShowPassword] = useState(false);
@@ -25,18 +27,22 @@ function Input(props) {
   const inputType = type === "password" && showPassword ? "text" : type;
 
   return (
-    <div className="w-full flex flex-col items-end">
-      <label className="flex items-center w-full justify-between capitalize text-left">
+    <div className="flex flex-col items-end w-full">
+      <label className="flex items-center justify-between capitalize text-left">
         {label}{" "}
-        <div className="input-wrapper w-full max-w-64 flex justify-end rounded border-2 border-solid">
+        <div
+          className={`input-wrapper max-w-64 flex justify-end rounded border-2 border-solid ${inputClass}`}
+        >
           <input
             type={inputType}
             required={required}
             name={name}
-            value={value}
+            value={type === "text" && value}
+            checked={type === "checkbox" && checked}
             disabled={disabled}
             placeholder={placeholder}
             onChange={onChange}
+            autoComplete="on"
           />
           {type === "password" && (
             <Button
