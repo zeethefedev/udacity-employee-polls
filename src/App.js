@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import Navbar from "./components/Navbar";
 
 function App() {
-  const currentUser = useSelector((state) => state.user.info);
+  const currentUser = useSelector((state) => state.user.currentUser);
 
   return (
     <div className="App">

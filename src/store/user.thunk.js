@@ -26,13 +26,13 @@ export const login = createAsyncThunk("/login", async (user) => {
 //signup
 export const signup = createAsyncThunk("/signup", async (user) => {
   let response = {};
-  await _saveUser(user).then((newUser) => {
-    if (newUser) {
+  await _saveUser(user)
+    .then((newUser) => {
       response.user = newUser;
-    } else {
-      response.error = { code: "signup" };
-    }
-  });
+    })
+    .catch((error) => {
+      response.error = { code: "signup", message: error };
+    });
   return response;
 });
 
@@ -40,7 +40,6 @@ export const getAllUsers = createAsyncThunk("/get-users", async () => {
   let response = {};
   await _getUsers()
     .then((users) => {
-      debugger;
       const userList = Object.values(users);
       response.users = userList;
     })

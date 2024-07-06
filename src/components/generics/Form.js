@@ -2,11 +2,17 @@ import React from "react";
 import Input from "./Input";
 import Button from "./Button";
 import Message from "./Message";
-import { ERROR, setButtonDisabled } from "../../utils/utils.login";
+import {
+  ERROR,
+  validateConfirmPassword,
+  validatePassword,
+} from "../../utils/utils.login";
 
 function Form(props) {
   const {
+    mode,
     inputGroup,
+    buttonDisabled,
     buttonText,
     handleSetInputGroup,
     handleValidateForm,
@@ -33,11 +39,21 @@ function Form(props) {
     handleValidateForm();
   };
 
-  const buttonDisabled = setButtonDisabled(inputGroup);
-
   const errorField = (input) => {
     const code = `${input.name.toUpperCase().replaceAll("-", "_")}`;
-    return !input.value && input.touched && ERROR[code];
+    if (input.name === "password") {
+      return (
+        !validatePassword(input) &&
+        input.touched &&
+        ERROR[`${code}_${mode.toUpperCase()}`]
+      );
+    } else if (input.name === "confirm-password") {
+      return (
+        !validateConfirmPassword(inputGroup) && input.touched && ERROR[code]
+      );
+    } else {
+      return !input.value && input.touched && ERROR[code];
+    }
   };
 
   const typeField = (input) => {

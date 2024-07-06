@@ -1,8 +1,9 @@
 export const ERROR = {
   USERNAME: "Invalid username",
-  PASSWORD: "Invalid email",
-  LOGIN: "Invalid email",
-  SIGNUP: "Invalid email",
+  DISPLAY_NAME: "Invalid display name",
+  PASSWORD_SIGNUP: "Password must contain at least 1 digit",
+  PASSWORD_LOGIN: "Invalid password",
+  CONFIRM_PASSWORD: "Value must be the same as password",
 };
 
 export const MESSAGES = {
@@ -10,7 +11,7 @@ export const MESSAGES = {
   LOGIN_USERNAME_ERROR: "We cannot find the user",
   LOGIN_PASSWORD_ERROR: "Incorrect password",
   SIGNUP_SUCCESS: "Signed up successfully. Hang on while we redirect you ...",
-  SIGNUP_ERROR: "Try again",
+  SIGNUP_ERROR: "Username already exists. Please try again.",
   LOGIN_ALREADY_HAVE_ACCOUNT: "Do not have an account? Sign up instead",
   SIGNUP_ALREADY_HAVE_ACCOUNT: "Already have an account? Log in instead",
 };
@@ -23,44 +24,22 @@ export const toObject = (fieldArray) => {
   }));
 };
 
-export const updateInputInfo = (event, input) => {
-  const newInputProps = {
-    name: event.target.name,
-    value: event.target.value,
-  };
-  const newInfo = input.map((inp) =>
-    inp.name === newInputProps.name ? { ...inp, ...newInputProps } : inp
-  );
-  return newInfo;
-};
-
-export const setTouchedInfo = (input) => {
-  const touchedInfo = input.map((inp) => ({ ...inp, touched: true }));
-
-  return touchedInfo;
-};
-
 export const setButtonDisabled = (input) => {
   const buttonDisabled =
     input.every((inp) => inp.touched) && input.some((inp) => !inp.value);
   return buttonDisabled;
 };
 
-export const validateEmail = (email) => {
-  if (email?.includes("@")) {
+export const validatePassword = (input) => {
+  if (/\d/.test(input.value)) {
+    // must include 1 digit
     return true;
   } else return;
 };
 
-export const validatePassword = (pass) => {
-  if (pass.length > 5 && /\d/.test(pass)) {
-    return true;
-  } else return;
-};
-
-export const validateConfirmPassword = (input) => {
+export const validateConfirmPassword = (inputs) => {
   const getFieldValue = (fieldName) => {
-    return input.find((inp) => inp.name === fieldName)?.value;
+    return inputs.find((inp) => inp.name === fieldName)?.value;
   };
 
   const newPassword = getFieldValue("password");
@@ -68,22 +47,13 @@ export const validateConfirmPassword = (input) => {
   return confirmPassword === newPassword;
 };
 
-export const validateForm = (inputs) => {
+export const validateSignupForm = (inputs) => {
   const validFields = inputs.map((inp) =>
-    inp.name === "email"
-      ? validateEmail(inp.value)
-      : validatePassword(inp.value)
-  );
-
-  const validForm = validFields.every((field) => field);
-  return validForm;
-};
-
-export const validateChangePasswordForm = (input) => {
-  const validFields = input.map((inp) =>
     inp.name === "password"
-      ? validatePassword(inp.value)
-      : validateConfirmPassword(input)
+      ? validatePassword(inp)
+      : inp.name === "confirm-password"
+      ? validateConfirmPassword(inputs)
+      : inp.value
   );
 
   const validForm = validFields.every((field) => field);

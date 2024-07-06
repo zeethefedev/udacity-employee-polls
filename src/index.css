@@ -126,3 +126,7 @@ form {
 .text-color-red {
   color: var(--hot-pink);
 }
+
+h1 {
+  @apply text-4xl font-bold;
+}

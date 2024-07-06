@@ -1,19 +1,19 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
-import { getAllUsers, login } from "./user.thunk";
+import { getAllUsers, login, signup } from "./user.thunk";
 import { MESSAGES } from "../utils/utils.login";
 
 export const userSlice = createSlice({
   name: "user",
   initialState: {
     users: [],
-    info: undefined,
+    currentUser: undefined,
     error: false,
     loading: false,
     message: "",
   },
   reducers: {
     setInfo: (state, action) => {
-      state.info = action.payload;
+      state.currentUser = action.payload;
     },
     resetLoginForm: (state, action) => {
       state.error = false;
@@ -21,7 +21,7 @@ export const userSlice = createSlice({
       state.message = "";
     },
     logout: (state) => {
-      state.info = undefined;
+      state.currentUser = undefined;
       state.error = false;
       state.message = "";
       state.loading = false;
@@ -35,8 +35,19 @@ export const userSlice = createSlice({
           state.error = true;
           state.message = MESSAGES[`LOGIN_${error.code.toUpperCase()}_ERROR`];
         } else {
-          state.info = user;
+          state.currentUser = user;
           state.message = MESSAGES.LOGIN_SUCCESS;
+        }
+        state.loading = false;
+      })
+      .addCase(signup.fulfilled, (state, action) => {
+        const { user, error } = action.payload;
+        if (error) {
+          state.error = true;
+          state.message = MESSAGES.SIGNUP_ERROR;
+        } else {
+          state.currentUser = user;
+          state.message = MESSAGES.SIGNUP_SUCCESS;
         }
         state.loading = false;
       })
@@ -49,11 +60,14 @@ export const userSlice = createSlice({
         }
         state.loading = false;
       })
-      .addMatcher(isAnyOf(login.pending), (state) => {
-        state.error = false;
-        state.message = "";
-        state.loading = true;
-      });
+      .addMatcher(
+        isAnyOf(login.pending, signup.pending, getAllUsers.pending),
+        (state) => {
+          state.error = false;
+          state.message = "";
+          state.loading = true;
+        }
+      );
   },
 });
 

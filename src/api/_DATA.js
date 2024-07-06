@@ -176,10 +176,14 @@ function formatUser({ username, displayName, password }) {
 
 export function _saveUser(user) {
   const { username, displayName, password } = user;
+  const userIds = Object.keys(users);
   return new Promise((resolve, reject) => {
     if (!username || !displayName || !password) {
       reject("Please provide valid credential");
+    } else if (userIds.includes(username)) {
+      reject("User already exists");
     }
+
     const formattedUser = formatUser(user);
     setTimeout(() => {
       users = {
