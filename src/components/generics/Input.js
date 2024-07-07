@@ -27,7 +27,7 @@ function Input(props) {
   const inputType = type === "password" && showPassword ? "text" : type;
 
   return (
-    <div className="flex flex-col items-end w-full">
+    <div className="flex flex-col w-full">
       <label className="flex items-center justify-between capitalize text-left">
         {label}{" "}
         <div

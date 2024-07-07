@@ -1,5 +1,6 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import {
+  addQuestion,
   getAllQuestions,
   getQuestionById,
   updateQuestionAnswer,
@@ -57,11 +58,23 @@ export const questionSlice = createSlice({
         }
         state.loading = false;
       })
+      .addCase(addQuestion.fulfilled, (state, action) => {
+        const { question, error } = action.payload;
+        if (error) {
+          state.error = true;
+        } else {
+          state.currentQuestion = question;
+          state.questions = [...state.questions, question];
+          debugger;
+        }
+        state.loading = false;
+      })
       .addMatcher(
         isAnyOf(
           getAllQuestions.pending,
           getQuestionById.pending,
-          updateQuestionAnswer.pending
+          updateQuestionAnswer.pending,
+          addQuestion.pending
         ),
         (state) => {
           state.error = false;

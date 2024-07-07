@@ -197,12 +197,9 @@ export function _saveUser(user) {
 }
 
 export function _saveQuestion(question) {
+  const { author, optionOneText, optionTwoText } = question;
   return new Promise((resolve, reject) => {
-    if (
-      !question.optionOneText ||
-      !question.optionTwoText ||
-      !question.author
-    ) {
+    if (!optionOneText || !optionTwoText || !author) {
       reject("Please provide optionOneText, optionTwoText, and author");
     }
 

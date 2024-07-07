@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 import Form from "../generics/Form";
 import { useDispatch, useSelector } from "react-redux";
+import { toObject } from "../../utils/utils.login";
+import { addQuestion } from "../../store/question.thunk";
 
-const INPUTS = [
-  { name: "question", value: "", touched: false },
-  { name: "option 1", value: "", touched: false },
-  { name: "option 2", value: "", touched: false },
-];
-
-function AddForm() {
-  const [inputGroup, setInputGroup] = useState(INPUTS);
+function AddForm({ initialInputs }) {
+  const [inputGroup, setInputGroup] = useState(toObject(initialInputs));
   const errorForm = useSelector((state) => state.question.error);
   const message = useSelector((state) => state.question.message);
   const loading = useSelector((state) => state.question.loading);
+  const user = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
 
   const handleSetInputGroup = (newInputs) => {
@@ -22,17 +19,29 @@ function AddForm() {
   const validateQuestions = () => {
     const validForm = inputGroup.every((input) => input.value && input.touched);
     if (validForm) {
-      const question = inputGroup[0].value;
-      const optionOne = inputGroup[1].value;
-      const optionTwo = inputGroup[2].value;
-      //   dispatch(login({ username, password }));
+      const [optionOneText, optionTwoText] = inputGroup.map(
+        (input) => input.value
+      );
+      dispatch(
+        addQuestion({
+          author: user.id,
+          optionOneText,
+          optionTwoText,
+        })
+      );
     }
   };
 
+  const buttonDisabled =
+    inputGroup.every((inp) => inp.touched) &&
+    inputGroup.some((inp) => !inp.value);
+
   return (
     <Form
+      heading="Would you rather..."
       inputGroup={inputGroup}
       buttonText="Add new question"
+      buttonDisabled={buttonDisabled}
       handleSetInputGroup={handleSetInputGroup}
       handleValidateForm={validateQuestions}
       loading={loading}

@@ -4,7 +4,8 @@ import AddForm from "../components/add/AddForm";
 function Add() {
   return (
     <div>
-      <AddForm />
+      <h1>Add new question</h1>
+      <AddForm initialInputs={["option-one", "option-two"]} />
     </div>
   );
 }

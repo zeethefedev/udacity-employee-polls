@@ -42,13 +42,13 @@ export const addQuestion = createAsyncThunk(
   "/add-question",
   async (question) => {
     let response = {};
-    await _saveQuestion(question).then((newQuestion) => {
-      if (newQuestion) {
+    await _saveQuestion(question)
+      .then((newQuestion) => {
         response.question = newQuestion;
-      } else {
-        response.error = { code: "add" };
-      }
-    });
+      })
+      .catch((error) => {
+        response.error = { code: "add", message: error };
+      });
     return response;
   }
 );

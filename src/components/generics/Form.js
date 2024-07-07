@@ -11,6 +11,7 @@ import {
 function Form(props) {
   const {
     mode,
+    heading,
     inputGroup,
     buttonDisabled,
     buttonText,
@@ -58,13 +59,13 @@ function Form(props) {
 
   const typeField = (input) => {
     const inputName = input.name;
-    if (inputName.includes("name")) return "text";
-    else if (inputName.includes("password")) return "password";
-    else return input.name;
+    if (inputName.includes("password")) return "password";
+    else return "text";
   };
 
   return (
     <form className="flex flex-col gap-4 max-w-md m-auto rounded items-center p-8 border-2 border-solid">
+      <div>{heading}</div>
       {inputGroup.map((input) => (
         <Input
           type={typeField(input)}
