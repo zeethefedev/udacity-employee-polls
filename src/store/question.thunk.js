@@ -57,10 +57,11 @@ export const addQuestion = createAsyncThunk(
 export const updateQuestionAnswer = createAsyncThunk(
   "/update-answer",
   async (data) => {
+    // const {username, questionId, answer} = data
     let response = {};
-    await _saveQuestionAnswer(data).then((result) => {
-      if (result) {
-        response.result = result;
+    await _saveQuestionAnswer(data).then((newQuestion) => {
+      if (newQuestion) {
+        response.question = newQuestion;
       } else {
         response.error = { code: "update" };
       }

@@ -1,5 +1,9 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
-import { getAllQuestions, getQuestionById } from "./question.thunk";
+import {
+  getAllQuestions,
+  getQuestionById,
+  updateQuestionAnswer,
+} from "./question.thunk";
 
 export const questionSlice = createSlice({
   name: "question",
@@ -31,8 +35,34 @@ export const questionSlice = createSlice({
         }
         state.loading = false;
       })
+      .addCase(updateQuestionAnswer.fulfilled, (state, action) => {
+        const { question, error } = action.payload;
+        if (error) {
+          state.error = true;
+        } else {
+          state.currentQuestion = question;
+          const allAnswers =
+            question.optionOne.votes.length + question.optionTwo.votes.length;
+          const answerPercentOne = question.optionOne.votes.length / allAnswers;
+          const answerPercentTwo = question.optionTwo.votes.length / allAnswers;
+          state.message = `${answerPercentOne.toFixed(
+            2
+          )}% employees votes One and ${answerPercentTwo.toFixed(
+            2
+          )}% employees votes for Two.`;
+          const newQuestions = state.questions.map((quest) =>
+            quest.id === question.id ? question : quest
+          );
+          state.questions = newQuestions;
+        }
+        state.loading = false;
+      })
       .addMatcher(
-        isAnyOf(getAllQuestions.pending, getQuestionById.pending),
+        isAnyOf(
+          getAllQuestions.pending,
+          getQuestionById.pending,
+          updateQuestionAnswer.pending
+        ),
         (state) => {
           state.error = false;
           state.message = "";

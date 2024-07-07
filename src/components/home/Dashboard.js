@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import QuestionCard from "./QuestionCard";
 import Input from "../generics/Input";
 import { Outlet, useLocation } from "react-router-dom";
+import { questionHasVote } from "../../utils/utils.question";
 
 function QuestionList({ questions }) {
   const [active, setActive] = useState();
@@ -31,23 +32,23 @@ function QuestionList({ questions }) {
 }
 
 function Dashboard({ questions, user }) {
-  const { id } = user;
-  const questionHasVote = (question) => {
-    return (
-      question.optionOne.votes.includes(id) ||
-      question.optionTwo.votes.includes(id)
-    );
-  };
+  // const { id } = user;
+  // const questionHasVote = (question) => {
+  //   return (
+  //     question.optionOne.votes.includes(id) ||
+  //     question.optionTwo.votes.includes(id)
+  //   );
+  // };
 
   const sortByTimestamp = (array) => {
     return array.sort((a, b) => b.timestamp - a.timestamp);
   };
 
   const answeredQuestions = sortByTimestamp(
-    questions.filter((question) => questionHasVote(question))
+    questions.filter((question) => questionHasVote(question, user))
   );
   const unansweredQuestions = sortByTimestamp(
-    questions.filter((question) => !questionHasVote(question))
+    questions.filter((question) => !questionHasVote(question, user))
   );
 
   const [showAnswered, setShowAnswered] = useState(false);

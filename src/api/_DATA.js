@@ -109,7 +109,7 @@ let questions = {
       text: "take a course on ReactJS",
     },
     optionTwo: {
-      votes: ["mtsamis"],
+      votes: ["mtsamis", "zoshikanlu"],
       text: "take a course on unit testing with Jest",
     },
   },
@@ -223,7 +223,6 @@ export function _saveQuestionAnswer({ authedUser, qid, answer }) {
     if (!authedUser || !qid || !answer) {
       reject("Please provide authedUser, qid, and answer");
     }
-
     setTimeout(() => {
       users = {
         ...users,
@@ -235,7 +234,6 @@ export function _saveQuestionAnswer({ authedUser, qid, answer }) {
           },
         },
       };
-
       questions = {
         ...questions,
         [qid]: {
@@ -247,7 +245,9 @@ export function _saveQuestionAnswer({ authedUser, qid, answer }) {
         },
       };
 
-      resolve(true);
+      const newQuestion = questions[qid];
+
+      resolve(newQuestion);
     }, 500);
   });
 }
