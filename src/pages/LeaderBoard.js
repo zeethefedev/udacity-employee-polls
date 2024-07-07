@@ -5,8 +5,8 @@ import LeaderCard from "../components/leaderboard/LeaderCard";
 
 function LeaderBoard() {
   const dispatch = useDispatch();
-
   const users = useSelector((state) => state.user.users);
+
   const getUsers = () => {
     dispatch(getAllUsers());
   };
@@ -19,13 +19,20 @@ function LeaderBoard() {
 
   return (
     <>
-      {users && (
-        <>
-          {users.map((user) => (
-            <LeaderCard user={user} />
-          ))}
-        </>
-      )}
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Answers</th>
+          <th>Questions</th>
+        </tr>
+        {users && (
+          <>
+            {users.map((user) => (
+              <LeaderCard user={user} />
+            ))}
+          </>
+        )}
+      </table>
     </>
   );
 }
