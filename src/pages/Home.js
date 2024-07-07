@@ -17,7 +17,9 @@ function Home() {
   }, []);
 
   return (
-    <>{questions && <Dashboard questions={questions} user={currentUser} />}</>
+    <div className="page-layout">
+      {questions && <Dashboard questions={questions} user={currentUser} />}
+    </div>
   );
 }
 

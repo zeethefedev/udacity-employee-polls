@@ -65,7 +65,7 @@ function Form(props) {
 
   return (
     <form className="flex flex-col gap-4 max-w-md m-auto rounded items-center p-8 border-2 border-solid">
-      <div>{heading}</div>
+      <h2>{heading}</h2>
       {inputGroup.map((input) => (
         <Input
           type={typeField(input)}

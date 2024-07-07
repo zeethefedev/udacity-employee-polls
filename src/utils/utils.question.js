@@ -4,3 +4,7 @@ export const questionHasVote = (question, user) => {
     question.optionTwo.votes.includes(user.id)
   );
 };
+
+export const sortByTimestamp = (array) => {
+  return array.sort((a, b) => b.timestamp - a.timestamp);
+};

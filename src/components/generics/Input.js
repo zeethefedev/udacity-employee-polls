@@ -16,6 +16,7 @@ function Input(props) {
     onChange,
     showForgotPassword,
     inputClass = "w-full",
+    wrapperClass = "flex flex-col w-full",
   } = props;
 
   const [showPassword, setShowPassword] = useState(false);
@@ -27,7 +28,7 @@ function Input(props) {
   const inputType = type === "password" && showPassword ? "text" : type;
 
   return (
-    <div className="flex flex-col w-full">
+    <div className={wrapperClass}>
       <label className="flex items-center justify-between capitalize text-left">
         {label}{" "}
         <div

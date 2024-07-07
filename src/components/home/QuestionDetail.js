@@ -7,6 +7,7 @@ import {
   updateQuestionAnswer,
 } from "../../store/question.thunk";
 import { questionHasVote } from "../../utils/utils.question";
+import Card from "../generics/Card";
 
 function QuestionDetail() {
   const { id } = useParams();
@@ -42,21 +43,24 @@ function QuestionDetail() {
   };
 
   return (
-    <div>
+    <Card className="question-card m-auto my-16 max-w-xl">
       {question && (
         <>
           <div>{question.author} asked</div>
-          <div>Would your rather...</div>
-          <Button onClick={() => handleSetAnswer("optionOne")}>
-            {question.optionOne.text}
-          </Button>
-          <Button onClick={() => handleSetAnswer("optionTwo")}>
-            {question.optionTwo.text}
-          </Button>
+          <h2>Would your rather...</h2>
+          <div className="flex items-center gap-2">
+            <Button onClick={() => handleSetAnswer("optionOne")}>
+              {question.optionOne.text}
+            </Button>
+            or
+            <Button onClick={() => handleSetAnswer("optionTwo")}>
+              {question.optionTwo.text}
+            </Button>
+          </div>
         </>
       )}
       {isQuestionsAnswered && <div>{getAnswerStatistics()}</div>}
-    </div>
+    </Card>
   );
 }
 

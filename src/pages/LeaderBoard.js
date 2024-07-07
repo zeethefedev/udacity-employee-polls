@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../store/user.thunk";
-import LeaderCard from "../components/leaderboard/LeaderCard";
+import LeaderRow from "../components/leaderboard/LeaderRow";
 
 function LeaderBoard() {
   const dispatch = useDispatch();
@@ -18,8 +18,8 @@ function LeaderBoard() {
   //sort by number of answer and questions
 
   return (
-    <>
-      <table>
+    <div className="page-layout">
+      <table className="w-full my-16">
         <tr>
           <th>Name</th>
           <th>Answers</th>
@@ -28,12 +28,12 @@ function LeaderBoard() {
         {users && (
           <>
             {users.map((user) => (
-              <LeaderCard user={user} />
+              <LeaderRow user={user} />
             ))}
           </>
         )}
       </table>
-    </>
+    </div>
   );
 }
 
