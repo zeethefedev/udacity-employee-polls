@@ -31,13 +31,14 @@ function LoginSignupForm({ mode = "login", initialInputs }) {
       );
       if (validForm) {
         const [username, password] = inputGroup.map((input) => input.value);
-        dispatch(login({ username, password }));
+        dispatch(login({ username, password }))
+          .unwrap()
+          .then(() => navigate("/"));
       }
     } else {
       //mode signup
       const validForm = validateSignupForm(inputGroup);
       if (validForm) {
-        console.log("valid signup");
         const [username, displayName, password] = inputGroup.map(
           (input) => input.value
         );

@@ -38,7 +38,7 @@ function Input(props) {
             type={inputType}
             required={required}
             name={name}
-            value={type === "text" && value}
+            value={value}
             checked={type === "checkbox" && checked}
             disabled={disabled}
             placeholder={placeholder}
