@@ -65,7 +65,6 @@ export const questionSlice = createSlice({
         } else {
           state.currentQuestion = question;
           state.questions = [...state.questions, question];
-          debugger;
         }
         state.loading = false;
       })

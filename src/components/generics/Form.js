@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
 import Message from "./Message";
 import {
   ERROR,
+  toObject,
   validateConfirmPassword,
   validatePassword,
 } from "../../utils/utils.login";
@@ -12,16 +13,16 @@ function Form(props) {
   const {
     mode,
     heading,
-    inputGroup,
+    initialInputs,
     buttonDisabled,
     buttonText,
-    handleSetInputGroup,
     handleValidateForm,
     loading,
     message,
     errorForm,
     children,
   } = props;
+  const [inputGroup, setInputGroup] = useState(toObject(initialInputs));
 
   const handleChange = (e) => {
     const newValue = e.target.value;
@@ -30,14 +31,14 @@ function Form(props) {
         ? { ...input, value: newValue, touched: true }
         : input
     );
-    handleSetInputGroup(newInputs);
+    setInputGroup(newInputs);
   };
 
   const validateForm = (e) => {
     e.preventDefault();
     const newInputs = inputGroup.map((input) => ({ ...input, touched: true }));
-    handleSetInputGroup(newInputs);
-    handleValidateForm();
+    setInputGroup(newInputs);
+    handleValidateForm(newInputs);
   };
 
   const errorField = (input) => {
@@ -82,7 +83,7 @@ function Form(props) {
         className="w-full capitalize"
         state={loading && "loading"}
         onClick={validateForm}
-        disabled={buttonDisabled || loading}
+        disabled={buttonDisabled(inputGroup) || loading}
       >
         {buttonText}
       </Button>
