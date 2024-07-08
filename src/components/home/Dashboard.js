@@ -29,31 +29,27 @@ function Dashboard({ questions, user }) {
   const handleShowAnswered = () => {
     setShowAnswered(!showAnswered);
   };
-  return (
+  return isQuestionDetailScreen ? (
+    <Outlet />
+  ) : (
     <>
-      {isQuestionDetailScreen ? (
-        <Outlet />
+      <Input
+        type="checkbox"
+        label="show answered questions"
+        checked={showAnswered}
+        onChange={handleShowAnswered}
+        inputClass="w-auto"
+        wrapperClass="flex justify-end"
+      />
+      {showAnswered ? (
+        <>
+          <h1>Answered Questions</h1>
+          <QuestionList questions={answeredQuestions} />
+        </>
       ) : (
         <>
-          <Input
-            type="checkbox"
-            label="show answered questions"
-            checked={showAnswered}
-            onChange={handleShowAnswered}
-            inputClass="w-auto"
-            wrapperClass="flex justify-end"
-          />
-          {showAnswered ? (
-            <>
-              <h1>Answered Questions</h1>
-              <QuestionList questions={answeredQuestions} />
-            </>
-          ) : (
-            <>
-              <h1>Unanswered Questions</h1>
-              <QuestionList questions={unansweredQuestions} />
-            </>
-          )}
+          <h1>Unanswered Questions</h1>
+          <QuestionList questions={unansweredQuestions} />
         </>
       )}
     </>

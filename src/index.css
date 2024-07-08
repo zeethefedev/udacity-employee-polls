@@ -171,3 +171,7 @@ table {
   background-color: var(--background);
   @apply rounded border-2 border-solid;
 }
+
+a {
+  color: var(--dark-blue);
+}

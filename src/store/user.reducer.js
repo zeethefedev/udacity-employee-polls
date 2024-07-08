@@ -12,10 +12,7 @@ export const userSlice = createSlice({
     message: "",
   },
   reducers: {
-    setInfo: (state, action) => {
-      state.currentUser = action.payload;
-    },
-    resetLoginForm: (state, action) => {
+    resetLoginForm: (state) => {
       state.error = false;
       state.loading = false;
       state.message = "";
@@ -29,28 +26,6 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(login.fulfilled, (state, action) => {
-        const { user, error } = action.payload;
-        if (error) {
-          state.error = true;
-          state.message = MESSAGES[`LOGIN_${error.code.toUpperCase()}_ERROR`];
-        } else {
-          state.currentUser = user;
-          state.message = MESSAGES.LOGIN_SUCCESS;
-        }
-        state.loading = false;
-      })
-      .addCase(signup.fulfilled, (state, action) => {
-        const { user, error } = action.payload;
-        if (error) {
-          state.error = true;
-          state.message = MESSAGES.SIGNUP_ERROR;
-        } else {
-          state.currentUser = user;
-          state.message = MESSAGES.SIGNUP_SUCCESS;
-        }
-        state.loading = false;
-      })
       .addCase(getAllUsers.fulfilled, (state, action) => {
         const { users, error } = action.payload;
         if (error) {
@@ -60,6 +35,24 @@ export const userSlice = createSlice({
         }
         state.loading = false;
       })
+      .addMatcher(
+        isAnyOf(login.fulfilled, signup.fulfilled),
+        (state, action) => {
+          const { mode, user, error } = action.payload;
+          if (error) {
+            state.error = true;
+            const key =
+              mode === "login"
+                ? `${mode.toUpperCase()}_${error.code.toUpperCase()}`
+                : `${mode.toUpperCase()}`;
+            state.message = MESSAGES[`${key}_ERROR`];
+          } else {
+            state.currentUser = user;
+            state.message = MESSAGES[`${mode.toUpperCase()}_SUCCESS`];
+          }
+          state.loading = false;
+        }
+      )
       .addMatcher(
         isAnyOf(login.pending, signup.pending, getAllUsers.pending),
         (state) => {

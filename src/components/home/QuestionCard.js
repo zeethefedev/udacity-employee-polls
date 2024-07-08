@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 function QuestionCard({ question }) {
   const { author, timestamp, optionOne, optionTwo } = question;
   const navigate = useNavigate();
+
   const handleNavigate = () => {
     navigate(`question/${question.id}`);
   };
