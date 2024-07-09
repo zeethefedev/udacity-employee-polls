@@ -175,3 +175,11 @@ table {
 a {
   color: var(--dark-blue);
 }
+
+th {
+  padding: 16px;
+}
+
+td {
+  padding: 8px 16px;
+}
