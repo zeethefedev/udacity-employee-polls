@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Form from "../generics/Form";
 import Button from "../generics/Button";
-import { MESSAGES } from "../../utils/utils.login";
+import { MESSAGES } from "../../utils/utils.user";
 
 function LoginSignupForm({
   mode = "login",

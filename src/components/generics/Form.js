@@ -7,7 +7,7 @@ import {
   toObject,
   validateConfirmPassword,
   validatePassword,
-} from "../../utils/utils.login";
+} from "../../utils/utils.user";
 
 function Form(props) {
   const {

@@ -1,6 +1,6 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { getAllUsers, login, signup } from "./user.thunk";
-import { MESSAGES } from "../utils/utils.login";
+import { MESSAGES } from "../utils/utils.user";
 
 export const userSlice = createSlice({
   name: "user",

@@ -55,7 +55,7 @@ export const getUserById = createAsyncThunk("/get-user", async (userId) => {
     const userList = Object.values(users);
     response.user = userList.find((user) => user.id === userId);
     if (!response.user) {
-      response.error = { code: "cannot find" };
+      response.error = { code: "get-user" };
     }
   });
   return response;

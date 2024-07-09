@@ -1,3 +1,14 @@
+export function formatUser({ username, displayName, password }) {
+  return {
+    id: username,
+    password,
+    name: displayName,
+    avatarURL: null,
+    answers: {},
+    questions: [],
+  };
+}
+
 export const ERROR = {
   USERNAME: "Invalid username",
   DISPLAY_NAME: "Invalid display name",
@@ -24,12 +35,6 @@ export const toObject = (fieldArray) => {
     value: "",
     touched: false,
   }));
-};
-
-export const setButtonDisabled = (input) => {
-  const buttonDisabled =
-    input.every((inp) => inp.touched) && input.some((inp) => !inp.value);
-  return buttonDisabled;
 };
 
 export const validatePassword = (input) => {

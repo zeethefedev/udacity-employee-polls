@@ -1,6 +1,6 @@
 import React from "react";
 import LoginSignupForm from "../components/login-signup/LoginSignupForm";
-import { validateSignupForm } from "../utils/utils.login";
+import { validateSignupForm } from "../utils/utils.user";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { signup } from "../store/user.thunk";

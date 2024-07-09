@@ -1,4 +1,5 @@
-import { getVotes } from "../utils/utils.question";
+import { formatUser } from "../utils/utils.user";
+import { formatQuestion, getVotes } from "../utils/utils.question";
 
 let users = {
   sarahedo: {
@@ -130,13 +131,6 @@ let questions = {
   },
 };
 
-function generateUID() {
-  return (
-    Math.random().toString(36).substring(2, 15) +
-    Math.random().toString(36).substring(2, 15)
-  );
-}
-
 export function _getUsers() {
   return new Promise((resolve) => {
     setTimeout(() => resolve({ ...users }), 1000);
@@ -147,33 +141,6 @@ export function _getQuestions() {
   return new Promise((resolve) => {
     setTimeout(() => resolve({ ...questions }), 1000);
   });
-}
-
-function formatQuestion({ optionOneText, optionTwoText, author }) {
-  return {
-    id: generateUID(),
-    timestamp: Date.now(),
-    author,
-    optionOne: {
-      votes: [],
-      text: optionOneText,
-    },
-    optionTwo: {
-      votes: [],
-      text: optionTwoText,
-    },
-  };
-}
-
-function formatUser({ username, displayName, password }) {
-  return {
-    id: username,
-    password,
-    name: displayName,
-    avatarURL: null,
-    answers: {},
-    questions: [],
-  };
 }
 
 export function _saveUser(user) {
