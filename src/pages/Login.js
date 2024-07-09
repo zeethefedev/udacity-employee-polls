@@ -32,15 +32,12 @@ function Login() {
   };
 
   return (
-    <>
-      <h1>Login</h1>
-      <LoginSignupForm
-        initialInputs={["username", "password"]}
-        handleValidateForm={handleValidateForm}
-        handleNavigate={handleNavigate}
-        buttonDisabled={buttonDisabled}
-      />
-    </>
+    <LoginSignupForm
+      initialInputs={["username", "password"]}
+      handleValidateForm={handleValidateForm}
+      handleNavigate={handleNavigate}
+      buttonDisabled={buttonDisabled}
+    />
   );
 }
 

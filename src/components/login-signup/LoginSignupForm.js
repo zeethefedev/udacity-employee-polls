@@ -17,6 +17,7 @@ function LoginSignupForm({
 
   return (
     <Form
+      heading={mode}
       initialInputs={initialInputs}
       buttonText={mode}
       buttonDisabled={buttonDisabled}

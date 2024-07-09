@@ -31,21 +31,18 @@ function Signup() {
     inputGroup.every((inp) => inp.touched) && !validateSignupForm(inputGroup);
 
   return (
-    <>
-      <h1>Signup</h1>
-      <LoginSignupForm
-        mode="signup"
-        initialInputs={[
-          "username",
-          "display-name",
-          "password",
-          "confirm-password",
-        ]}
-        handleValidateForm={handleValidateForm}
-        handleNavigate={handleNavigate}
-        buttonDisabled={buttonDisabled}
-      />
-    </>
+    <LoginSignupForm
+      mode="signup"
+      initialInputs={[
+        "username",
+        "display-name",
+        "password",
+        "confirm-password",
+      ]}
+      handleValidateForm={handleValidateForm}
+      handleNavigate={handleNavigate}
+      buttonDisabled={buttonDisabled}
+    />
   );
 }
 

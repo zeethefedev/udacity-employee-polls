@@ -147,7 +147,7 @@ h1 {
 }
 
 h2 {
-  @apply text-2xl font-semibold mb-4;
+  @apply text-2xl font-semibold mb-4 capitalize;
 }
 
 h3 {
