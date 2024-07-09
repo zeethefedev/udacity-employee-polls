@@ -2,20 +2,17 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../store/user.thunk";
 import LeaderRow from "../components/leaderboard/LeaderRow";
+import { sortByQuestionAnswer } from "../utils/utils.question";
 
 function LeaderBoard() {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.user.users);
 
-  const getUsers = () => {
-    dispatch(getAllUsers());
-  };
-
   useEffect(() => {
-    getUsers();
+    dispatch(getAllUsers());
   }, []);
 
-  //sort by number of answer and questions
+  const sortedUsers = sortByQuestionAnswer(users);
 
   return (
     <div className="page-layout">
@@ -25,13 +22,7 @@ function LeaderBoard() {
           <th>Answers</th>
           <th>Questions</th>
         </tr>
-        {users && (
-          <>
-            {users.map((user) => (
-              <LeaderRow user={user} />
-            ))}
-          </>
-        )}
+        {users && sortedUsers.map((user) => <LeaderRow user={user} />)}
       </table>
     </div>
   );

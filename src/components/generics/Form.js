@@ -34,7 +34,7 @@ function Form(props) {
     setInputGroup(newInputs);
   };
 
-  const validateForm = (e) => {
+  const handleButtonClick = (e) => {
     e.preventDefault();
     const newInputs = inputGroup.map((input) => ({ ...input, touched: true }));
     setInputGroup(newInputs);
@@ -59,9 +59,7 @@ function Form(props) {
   };
 
   const typeField = (input) => {
-    const inputName = input.name;
-    if (inputName.includes("password")) return "password";
-    else return "text";
+    return input.name.includes("password") ? "password" : "text";
   };
 
   return (
@@ -82,7 +80,7 @@ function Form(props) {
         variant="primary"
         className="w-full capitalize"
         state={loading && "loading"}
-        onClick={validateForm}
+        onClick={handleButtonClick}
         disabled={buttonDisabled(inputGroup) || loading}
       >
         {buttonText}

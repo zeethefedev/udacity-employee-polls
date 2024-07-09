@@ -11,10 +11,8 @@ function Input(props) {
     name,
     label,
     disabled,
-    placeholder,
     error,
     onChange,
-    showForgotPassword,
     inputClass = "w-full",
     wrapperClass = "flex flex-col w-full",
   } = props;
@@ -41,7 +39,6 @@ function Input(props) {
             value={value}
             checked={type === "checkbox" && checked}
             disabled={disabled}
-            placeholder={placeholder}
             onChange={onChange}
             autoComplete="on"
           />
@@ -57,9 +54,6 @@ function Input(props) {
         </div>
       </label>
       {error && <div className="text-right text-color-blue">{error}</div>}
-      {type === "password" && showForgotPassword && (
-        <Button variant="tetriary">Forgot Password</Button>
-      )}
     </div>
   );
 }

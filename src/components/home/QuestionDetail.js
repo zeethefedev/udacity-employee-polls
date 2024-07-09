@@ -49,12 +49,11 @@ function QuestionDetail() {
           />
           <h2>Would your rather...</h2>
           <div className="flex gap-2">
-            <Button onClick={() => handleSetAnswer("optionOne")}>
-              {question.optionOne.text}
-            </Button>
-            <Button onClick={() => handleSetAnswer("optionTwo")}>
-              {question.optionTwo.text}
-            </Button>
+            {["optionOne", "optionTwo"].map((option) => (
+              <Button onClick={() => handleSetAnswer(option)}>
+                {question[option].text}
+              </Button>
+            ))}
           </div>
           {isQuestionsAnswered && (
             <div>

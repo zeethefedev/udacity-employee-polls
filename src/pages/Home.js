@@ -8,12 +8,8 @@ function Home() {
   const questions = useSelector((state) => state.question.questions);
   const currentUser = useSelector((state) => state.user.currentUser);
 
-  const getQuestions = () => {
-    dispatch(getAllQuestions());
-  };
-
   useEffect(() => {
-    getQuestions();
+    dispatch(getAllQuestions());
   }, []);
 
   return (

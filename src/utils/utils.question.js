@@ -32,6 +32,18 @@ export const sortByTimestamp = (array) => {
   return array.sort((a, b) => b.timestamp - a.timestamp);
 };
 
+export const sortByQuestionAnswer = (array) => {
+  const arrayClone = [...array];
+  if (arrayClone.length > 1) {
+    return arrayClone.sort((a, b) => {
+      const answerLength = (x) => Object.keys(x.answers).length;
+      if (answerLength(b) === answerLength(a)) {
+        return b.questions.length - a.questions.length;
+      } else return answerLength(b) - answerLength(a);
+    });
+  } else return arrayClone;
+};
+
 export const getAnswerStatistics = (question) => {
   const textOne = question.optionOne.text;
   const textTwo = question.optionTwo.text;
