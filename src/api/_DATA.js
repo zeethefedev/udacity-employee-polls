@@ -212,6 +212,14 @@ export function _saveQuestion(question) {
         [formattedQuestion.id]: formattedQuestion,
       };
 
+      users = {
+        ...users,
+        [author]: {
+          ...users[author],
+          questions: [...users[author].questions, formattedQuestion.id],
+        },
+      };
+
       resolve(formattedQuestion);
     }, 1000);
   });
