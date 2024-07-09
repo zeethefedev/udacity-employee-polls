@@ -9,15 +9,12 @@ export const login = createAsyncThunk("/login", async (user) => {
     const currentUser = users[username];
     if (currentUser) {
       if (currentUser.password === password) {
-        //correct password
         response.user = currentUser;
       } else {
-        // wrong password
-        response.error = { code: "password" };
+        response.error = { code: "password" }; // wrong password
       }
     } else {
-      // cannot find user
-      response.error = { code: "username" };
+      response.error = { code: "username" }; // cannot find user
     }
   });
   return response;
@@ -38,14 +35,13 @@ export const signup = createAsyncThunk("/signup", async (user) => {
 
 export const getAllUsers = createAsyncThunk("/get-users", async () => {
   let response = {};
-  await _getUsers()
-    .then((users) => {
-      const userList = Object.values(users);
-      response.users = userList;
-    })
-    .catch((error) => {
-      response.error = { code: "get-users", message: error };
-    });
+  await _getUsers().then((users) => {
+    const userList = Object.values(users);
+    response.users = userList;
+    if (!users) {
+      response.error = { code: "get-users" };
+    }
+  });
   return response;
 });
 

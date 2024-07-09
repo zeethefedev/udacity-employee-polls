@@ -5,21 +5,18 @@ import {
   _saveQuestionAnswer,
 } from "../api/_DATA";
 
-//get all
 export const getAllQuestions = createAsyncThunk("/get-questions", async () => {
   let response = {};
-  await _getQuestions()
-    .then((questions) => {
-      const questionsList = Object.values(questions);
-      response.questions = questionsList;
-    })
-    .catch((error) => {
-      response.error = error;
-    });
+  await _getQuestions().then((questions) => {
+    const questionsList = Object.values(questions);
+    response.questions = questionsList;
+    if (!questions) {
+      response.error = { code: "get-questions" };
+    }
+  });
   return response;
 });
 
-//get all
 export const getQuestionById = createAsyncThunk(
   "/get-question",
   async (questionId) => {
@@ -30,34 +27,27 @@ export const getQuestionById = createAsyncThunk(
         (questions) => questions.id === questionId
       );
       if (!response.question) {
-        response.error = { code: "cannot find" };
+        response.error = { code: "get-question" };
       }
     });
     return response;
   }
 );
 
-//post new question
 export const addQuestion = createAsyncThunk(
   "/add-question",
   async (question) => {
     let response = {};
-    await _saveQuestion(question)
-      .then((newQuestion) => {
-        response.question = newQuestion;
-      })
-      .catch((error) => {
-        response.error = { code: "add", message: error };
-      });
+    await _saveQuestion(question).then((newQuestion) => {
+      response.question = newQuestion;
+    });
     return response;
   }
 );
 
-//edit
 export const updateQuestionAnswer = createAsyncThunk(
   "/update-answer",
   async (data) => {
-    // const {username, questionId, answer} = data
     let response = {};
     await _saveQuestionAnswer(data).then((newQuestion) => {
       if (newQuestion) {
@@ -69,5 +59,3 @@ export const updateQuestionAnswer = createAsyncThunk(
     return response;
   }
 );
-
-//delete

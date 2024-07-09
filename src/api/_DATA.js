@@ -144,12 +144,11 @@ export function _getQuestions() {
 }
 
 export function _saveUser(user) {
-  const { username, displayName, password } = user;
+  const { username } = user;
   const userIds = Object.keys(users);
+
   return new Promise((resolve, reject) => {
-    if (!username || !displayName || !password) {
-      reject("Please provide valid credential");
-    } else if (userIds.includes(username)) {
+    if (userIds.includes(username)) {
       reject("User already exists");
     }
 
@@ -166,12 +165,8 @@ export function _saveUser(user) {
 }
 
 export function _saveQuestion(question) {
-  const { author, optionOneText, optionTwoText } = question;
-  return new Promise((resolve, reject) => {
-    if (!optionOneText || !optionTwoText || !author) {
-      reject("Please provide optionOneText, optionTwoText, and author");
-    }
-
+  const { author } = question;
+  return new Promise((resolve) => {
     const formattedQuestion = formatQuestion(question);
     setTimeout(() => {
       questions = {
@@ -193,10 +188,7 @@ export function _saveQuestion(question) {
 }
 
 export function _saveQuestionAnswer({ authedUser, qid, answer }) {
-  return new Promise((resolve, reject) => {
-    if (!authedUser || !qid || !answer) {
-      reject("Please provide authedUser, qid, and answer");
-    }
+  return new Promise((resolve) => {
     setTimeout(() => {
       users = {
         ...users,
