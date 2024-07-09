@@ -18,6 +18,7 @@ function QuestionDetail() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const question = useSelector((state) => state.question.currentQuestion);
+  const author = useSelector((state) => state.question.author);
   const user = useSelector((state) => state.user.currentUser);
   const isQuestionsAnswered = question && questionHasVote(question, user);
 
@@ -43,21 +44,15 @@ function QuestionDetail() {
           <div>{question.author} asked</div>
           <img
             className="w-48 h-48"
-            src={question.avatarURL}
+            src={author.avatarURL}
             alt={question.author}
           />
           <h2>Would your rather...</h2>
           <div className="flex gap-2">
-            <Button
-              disabled={isQuestionsAnswered}
-              onClick={() => handleSetAnswer("optionOne")}
-            >
+            <Button onClick={() => handleSetAnswer("optionOne")}>
               {question.optionOne.text}
             </Button>
-            <Button
-              disabled={isQuestionsAnswered}
-              onClick={() => handleSetAnswer("optionTwo")}
-            >
+            <Button onClick={() => handleSetAnswer("optionTwo")}>
               {question.optionTwo.text}
             </Button>
           </div>

@@ -45,7 +45,7 @@ function Form(props) {
     const code = `${input.name.toUpperCase().replaceAll("-", "_")}`;
     if (input.name === "password") {
       return (
-        !validatePassword(input) &&
+        (mode === "login" ? !input.value : !validatePassword(input)) &&
         input.touched &&
         ERROR[`${code}_${mode.toUpperCase()}`]
       );

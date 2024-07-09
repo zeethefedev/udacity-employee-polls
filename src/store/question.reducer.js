@@ -12,6 +12,7 @@ export const questionSlice = createSlice({
   initialState: {
     questions: [],
     currentQuestion: undefined,
+    author: "",
     error: false,
     loading: false,
     message: "",
@@ -42,7 +43,7 @@ export const questionSlice = createSlice({
         if (error) {
           state.error = true;
         } else {
-          state.currentQuestion.avatarURL = user.avatarURL;
+          state.author = user;
         }
         state.loading = false;
       })

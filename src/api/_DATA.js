@@ -1,3 +1,5 @@
+import { getVotes } from "../utils/utils.question";
+
 let users = {
   sarahedo: {
     id: "sarahedo",
@@ -231,17 +233,14 @@ export function _saveQuestionAnswer({ authedUser, qid, answer }) {
           },
         },
       };
+
       questions = {
         ...questions,
         [qid]: {
           ...questions[qid],
-          [answer]: {
-            ...questions[qid][answer],
-            votes: questions[qid][answer].votes.concat([authedUser]),
-          },
+          ...getVotes(questions, authedUser, qid, answer),
         },
       };
-
       const newQuestion = questions[qid];
 
       resolve(newQuestion);

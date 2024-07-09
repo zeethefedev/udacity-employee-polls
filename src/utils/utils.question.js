@@ -25,3 +25,22 @@ export const getAnswerText = (question, user) => {
   if (one.votes.includes(user.id)) return one.text;
   else return two.text;
 };
+
+export const getVotes = (questions, authedUser, qid, answer) => {
+  const votes = [...questions[qid][answer].votes, authedUser];
+  const otherAnswer = answer === "optionOne" ? "optionTwo" : "optionOne";
+  const otherVotes = questions[qid][otherAnswer].votes.filter(
+    (user) => user !== authedUser
+  );
+  const votesObject = {
+    [answer]: {
+      ...questions[qid][answer],
+      votes: [...new Set(votes)], // each user can only vote once
+    },
+    [otherAnswer]: {
+      ...questions[qid][otherAnswer],
+      votes: otherVotes, // remove user from other vote if already voted
+    },
+  };
+  return votesObject;
+};
