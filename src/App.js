@@ -5,7 +5,6 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import LeaderBoard from "./pages/LeaderBoard";
 import Add from "./pages/Add";
-import Navbar from "./components/Navbar";
 import QuestionDetail from "./components/home/QuestionDetail";
 import { useSelector } from "react-redux";
 import PrivateRoutes from "./PrivateRoutes";
@@ -15,7 +14,6 @@ function App() {
 
   return (
     <div className="App">
-      {currentUser && <Navbar user={currentUser} />}
       <Routes>
         <Route element={<PrivateRoutes user={currentUser} />}>
           <Route exact path="/" element={<Home user={currentUser} />}>

@@ -1,24 +1,17 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { getAllUsers, login, signup } from "./user.thunk";
-import { MESSAGES } from "../utils/utils.user";
+import {
+  MESSAGES,
+  clearStorage,
+  getFromStorage,
+  saveToStorage,
+} from "../utils/utils.user";
 
 export const userSlice = createSlice({
   name: "user",
   initialState: {
     users: [],
-    currentUser: {
-      id: "sarahedo",
-      password: "password123",
-      name: "Sarah Edo",
-      avatarURL: "/avatar/sarahedo.svg",
-      answers: {
-        "8xf0y6ziyjabvozdd253nd": "optionOne",
-        "6ni6ok3ym7mf1p33lnez": "optionOne",
-        am8ehyc8byjqgar0jgpub9: "optionTwo",
-        loxhs1bqm25b708cmbf3g: "optionTwo",
-      },
-      questions: ["8xf0y6ziyjabvozdd253nd", "am8ehyc8byjqgar0jgpub9"],
-    },
+    currentUser: undefined,
     error: false,
     loading: false,
     message: "",
@@ -29,11 +22,15 @@ export const userSlice = createSlice({
       state.loading = false;
       state.message = "";
     },
+    setUser: (state) => {
+      state.currentUser = getFromStorage("USER");
+    },
     logout: (state) => {
       state.currentUser = undefined;
       state.error = false;
       state.message = "";
       state.loading = false;
+      clearStorage("USER");
     },
   },
   extraReducers: (builder) => {
@@ -51,6 +48,7 @@ export const userSlice = createSlice({
         isAnyOf(login.fulfilled, signup.fulfilled),
         (state, action) => {
           const { mode, user, error } = action.payload;
+          debugger;
           if (error) {
             state.error = true;
             const key =
@@ -58,9 +56,11 @@ export const userSlice = createSlice({
                 ? `${mode.toUpperCase()}_${error.code.toUpperCase()}`
                 : `${mode.toUpperCase()}`;
             state.message = MESSAGES[`${key}_ERROR`];
+            clearStorage("USER");
           } else {
             state.currentUser = user;
             state.message = MESSAGES[`${mode.toUpperCase()}_SUCCESS`];
+            saveToStorage("USER", user);
           }
           state.loading = false;
         }
@@ -76,6 +76,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { resetLoginForm, logout } = userSlice.actions;
+export const { resetLoginForm, setUser, logout } = userSlice.actions;
 
 export default userSlice.reducer;
