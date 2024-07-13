@@ -14,12 +14,11 @@ import {
 import Card from "../generics/Card";
 import { getUserById } from "../../store/user.thunk";
 
-function QuestionDetail() {
+function QuestionDetail({ user }) {
   const { id } = useParams();
   const dispatch = useDispatch();
   const question = useSelector((state) => state.question.currentQuestion);
   const author = useSelector((state) => state.question.author);
-  const user = useSelector((state) => state.user.currentUser);
   const isQuestionsAnswered = question && questionHasVote(question, user);
 
   useEffect(() => {

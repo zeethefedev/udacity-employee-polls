@@ -3,11 +3,10 @@ import Form from "../generics/Form";
 import { useDispatch, useSelector } from "react-redux";
 import { addQuestion } from "../../store/question.thunk";
 
-function AddForm({ initialInputs }) {
+function AddForm({ initialInputs, user }) {
   const errorForm = useSelector((state) => state.question.error);
   const message = useSelector((state) => state.question.message);
   const loading = useSelector((state) => state.question.loading);
-  const user = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
 
   const handleValidateForm = (inputGroup) => {

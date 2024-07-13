@@ -17,12 +17,15 @@ function App() {
     <div className="App">
       {currentUser && <Navbar user={currentUser} />}
       <Routes>
-        <Route element={<PrivateRoutes />}>
-          <Route exact path="/" element={<Home />}>
-            <Route path="question/:id" element={<QuestionDetail />} />
+        <Route element={<PrivateRoutes user={currentUser} />}>
+          <Route exact path="/" element={<Home user={currentUser} />}>
+            <Route
+              path="question/:id"
+              element={<QuestionDetail user={currentUser} />}
+            />
           </Route>
           <Route path="leaderboard" element={<LeaderBoard />} />
-          <Route path="add" element={<Add />} />
+          <Route path="add" element={<Add user={currentUser} />} />
         </Route>
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
