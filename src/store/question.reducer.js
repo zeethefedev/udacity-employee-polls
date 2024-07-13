@@ -6,6 +6,7 @@ import {
   updateQuestionAnswer,
 } from "./question.thunk";
 import { getUserById } from "./user.thunk";
+import { MESSAGES } from "../utils/utils.question";
 
 export const questionSlice = createSlice({
   name: "question",
@@ -61,13 +62,10 @@ export const questionSlice = createSlice({
         state.loading = false;
       })
       .addCase(addQuestion.fulfilled, (state, action) => {
-        const { question, error } = action.payload;
-        if (error) {
-          state.error = true;
-        } else {
-          state.currentQuestion = question;
-          state.questions = [...state.questions, question];
-        }
+        const { question } = action.payload;
+        state.currentQuestion = question;
+        state.questions = [...state.questions, question];
+        state.message = MESSAGES.ADD_QUESTION_SUCCESS;
         state.loading = false;
       })
       .addMatcher(

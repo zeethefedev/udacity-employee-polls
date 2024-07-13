@@ -13,12 +13,14 @@ import {
 } from "../../utils/utils.question";
 import Card from "../generics/Card";
 import { getUserById } from "../../store/user.thunk";
+import Loading from "../generics/Loading";
 
 function QuestionDetail({ user }) {
   const { id } = useParams();
   const dispatch = useDispatch();
   const question = useSelector((state) => state.question.currentQuestion);
   const author = useSelector((state) => state.question.author);
+  const loading = useSelector((state) => state.question.loading);
   const isQuestionsAnswered = question && questionHasVote(question, user);
 
   useEffect(() => {
@@ -63,6 +65,7 @@ function QuestionDetail({ user }) {
           )}
         </>
       )}
+      {loading && <Loading />}
     </Card>
   );
 }

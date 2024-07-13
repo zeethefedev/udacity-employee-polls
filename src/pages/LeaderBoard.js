@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../store/user.thunk";
 import LeaderRow from "../components/leaderboard/LeaderRow";
 import { sortByQuestionAnswer } from "../utils/utils.question";
+import Loading from "../components/generics/Loading";
 
 function LeaderBoard() {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.user.users);
+  const loading = useSelector((state) => state.user.loading);
 
   useEffect(() => {
     dispatch(getAllUsers());
@@ -16,14 +18,18 @@ function LeaderBoard() {
 
   return (
     <div className="page-layout">
-      <table className="w-full my-16">
-        <tr>
-          <th>Name</th>
-          <th>Answers</th>
-          <th>Questions</th>
-        </tr>
-        {users && sortedUsers.map((user) => <LeaderRow user={user} />)}
-      </table>
+      {loading ? (
+        <Loading />
+      ) : (
+        <table className="w-full my-16">
+          <tr>
+            <th>Name</th>
+            <th>Answers</th>
+            <th>Questions</th>
+          </tr>
+          {users && sortedUsers.map((user) => <LeaderRow user={user} />)}
+        </table>
+      )}
     </div>
   );
 }

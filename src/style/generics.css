@@ -1,9 +1,10 @@
+/* https://css-loaders.com/dots/ */
 .loader {
   display: flex;
   width: 36px;
   aspect-ratio: 4;
-  background: radial-gradient(circle closest-side, white 90%, #0000) 0 /
-    calc(100% / 3) 100% space;
+  background: radial-gradient(circle closest-side, var(--dark-blue) 90%, #0000)
+    0 / calc(100% / 3) 100% space;
   clip-path: inset(0 100% 0 0);
   animation: l1 1s steps(4) infinite;
 }

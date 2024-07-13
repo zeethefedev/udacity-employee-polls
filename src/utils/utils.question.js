@@ -1,3 +1,7 @@
+export const MESSAGES = {
+  ADD_QUESTION_SUCCESS: "Question added successfully",
+};
+
 function generateUID() {
   return (
     Math.random().toString(36).substring(2, 15) +

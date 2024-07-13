@@ -1,9 +1,5 @@
 import React from "react";
-import "../../style/generics.css";
-
-function LoadingSpinner() {
-  return <span className="loader m-auto"></span>;
-}
+import Loading from "./Loading";
 
 function Button(props) {
   const { state, className, variant, children, onClick, disabled } = props;
@@ -13,7 +9,7 @@ function Button(props) {
       onClick={onClick}
       disabled={disabled}
     >
-      {state === "loading" ? <LoadingSpinner /> : <>{children}</>}
+      {state === "loading" ? <Loading /> : <>{children}</>}
     </button>
   );
 }

@@ -35,6 +35,9 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(getAllUsers.pending, (state) => {
+        state.loading = true;
+      })
       .addCase(getAllUsers.fulfilled, (state, action) => {
         const { users, error } = action.payload;
         if (error) {
@@ -48,7 +51,6 @@ export const userSlice = createSlice({
         isAnyOf(login.fulfilled, signup.fulfilled),
         (state, action) => {
           const { mode, user, error } = action.payload;
-          debugger;
           if (error) {
             state.error = true;
             const key =
@@ -65,14 +67,11 @@ export const userSlice = createSlice({
           state.loading = false;
         }
       )
-      .addMatcher(
-        isAnyOf(login.pending, signup.pending, getAllUsers.pending),
-        (state) => {
-          state.error = false;
-          state.message = "";
-          state.loading = true;
-        }
-      );
+      .addMatcher(isAnyOf(login.pending, signup.pending), (state) => {
+        state.error = false;
+        state.message = "";
+        state.loading = true;
+      });
   },
 });
 

@@ -3,6 +3,8 @@ import QuestionCard from "./QuestionCard";
 import Input from "../generics/Input";
 import { Outlet, useLocation } from "react-router-dom";
 import { questionHasVote, sortByTimestamp } from "../../utils/utils.question";
+import { useSelector } from "react-redux";
+import Loading from "../generics/Loading";
 
 function QuestionList({ questions }) {
   return (
@@ -15,6 +17,7 @@ function QuestionList({ questions }) {
 }
 
 function Dashboard({ questions, user }) {
+  const loading = useSelector((state) => state.question.loading);
   const answeredQuestions = sortByTimestamp(
     questions.filter((question) => questionHasVote(question, user))
   );
@@ -44,12 +47,20 @@ function Dashboard({ questions, user }) {
       {showAnswered ? (
         <>
           <h1>Answered Questions</h1>
-          <QuestionList questions={answeredQuestions} />
+          {loading ? (
+            <Loading />
+          ) : (
+            <QuestionList questions={answeredQuestions} />
+          )}
         </>
       ) : (
         <>
           <h1>Unanswered Questions</h1>
-          <QuestionList questions={unansweredQuestions} />
+          {loading ? (
+            <Loading />
+          ) : (
+            <QuestionList questions={unansweredQuestions} />
+          )}
         </>
       )}
     </>
