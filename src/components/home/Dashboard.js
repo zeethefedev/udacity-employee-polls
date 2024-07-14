@@ -8,7 +8,7 @@ import Loading from "../generics/Loading";
 
 function QuestionList({ questions }) {
   return (
-    <div className="flex flex-row flex-wrap justify-center gap-4">
+    <div className="grid gap-6 md:grid-cols-2">
       {questions.map((question) => (
         <QuestionCard question={question} />
       ))}

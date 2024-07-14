@@ -12,7 +12,7 @@ function Home({ user }) {
   }, []);
 
   return (
-    <div className="page-layout">
+    <div className="p-6 md:px-28 md:py-11">
       {questions && <Dashboard questions={questions} user={user} />}
     </div>
   );

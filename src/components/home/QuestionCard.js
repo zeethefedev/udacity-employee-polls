@@ -12,7 +12,7 @@ function QuestionCard({ question }) {
 
   return (
     <Card
-      className="question-card clickable w-1/2 max-w-md"
+      className="question-card clickable max-w-md m-auto h-full"
       onClick={handleNavigate}
     >
       <div>

@@ -17,7 +17,7 @@ function LeaderBoard() {
   const sortedUsers = sortByQuestionAnswer(users);
 
   return (
-    <div className="page-layout">
+    <div className="p-6 md:px-28 md:py-11">
       {loading ? (
         <Loading />
       ) : (
