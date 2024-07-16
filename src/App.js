@@ -8,6 +8,7 @@ import Add from "./pages/Add";
 import QuestionDetail from "./components/home/QuestionDetail";
 import { useSelector } from "react-redux";
 import PrivateRoutes from "./PrivateRoutes";
+import Error from "./pages/Error";
 
 function App() {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -27,6 +28,7 @@ function App() {
         </Route>
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
+        <Route path="error" element={<Error />} />
       </Routes>
     </div>
   );

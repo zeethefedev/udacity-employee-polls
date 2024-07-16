@@ -3,7 +3,7 @@ import LoginSignupForm from "../components/login-signup/LoginSignupForm";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../store/user.thunk";
-import { resetLoginForm } from "../store/user.reducer";
+import { resetForm } from "../store/user.reducer";
 
 function Login() {
   const navigate = useNavigate();
@@ -15,13 +15,14 @@ function Login() {
       const [username, password] = inputGroup.map((input) => input.value);
       dispatch(login({ username, password }))
         .unwrap()
-        .then(() => navigate("/"));
+        .then(() => navigate("/"))
+        .catch(() => {});
     }
   };
 
   const handleNavigate = () => {
     navigate("/signup");
-    dispatch(resetLoginForm());
+    dispatch(resetForm());
   };
 
   const buttonDisabled = (inputGroup) => {

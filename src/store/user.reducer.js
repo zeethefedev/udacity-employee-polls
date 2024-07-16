@@ -17,7 +17,7 @@ export const userSlice = createSlice({
     message: "",
   },
   reducers: {
-    resetLoginForm: (state) => {
+    resetForm: (state) => {
       state.error = false;
       state.loading = false;
       state.message = "";
@@ -39,42 +39,38 @@ export const userSlice = createSlice({
         state.loading = true;
       })
       .addCase(getAllUsers.fulfilled, (state, action) => {
-        const { users, error } = action.payload;
-        if (error) {
-          state.error = true;
-        } else {
-          state.users = users;
-        }
+        const { users } = action.payload;
+        state.users = users;
         state.loading = false;
       })
-      .addMatcher(
-        isAnyOf(login.fulfilled, signup.fulfilled),
-        (state, action) => {
-          const { mode, user, error } = action.payload;
-          if (error) {
-            state.error = true;
-            const key =
-              mode === "login"
-                ? `${mode.toUpperCase()}_${error.code.toUpperCase()}`
-                : `${mode.toUpperCase()}`;
-            state.message = MESSAGES[`${key}_ERROR`];
-            clearStorage("USER");
-          } else {
-            state.currentUser = user;
-            state.message = MESSAGES[`${mode.toUpperCase()}_SUCCESS`];
-            saveToStorage("USER", user);
-          }
-          state.loading = false;
-        }
-      )
       .addMatcher(isAnyOf(login.pending, signup.pending), (state) => {
         state.error = false;
         state.message = "";
         state.loading = true;
-      });
+      })
+      .addMatcher(
+        isAnyOf(login.fulfilled, signup.fulfilled),
+        (state, action) => {
+          const { mode, user } = action.payload;
+          state.currentUser = user;
+          state.message = MESSAGES[`${mode.toUpperCase()}_SUCCESS`];
+          saveToStorage("USER", user);
+          state.loading = false;
+        }
+      )
+      .addMatcher(
+        isAnyOf(login.rejected, signup.rejected, getAllUsers.rejected),
+        (state, action) => {
+          const { message } = action.error;
+          state.error = true;
+          state.message = message;
+          state.loading = false;
+          clearStorage("USER");
+        }
+      );
   },
 });
 
-export const { resetLoginForm, setUser, logout } = userSlice.actions;
+export const { resetForm, setUser, logout } = userSlice.actions;
 
 export default userSlice.reducer;

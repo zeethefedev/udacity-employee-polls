@@ -57,7 +57,7 @@ function QuestionDetail({ user }) {
             ))}
           </div>
           {isQuestionsAnswered && (
-            <div>
+            <div className="flex flex-col gap-2">
               <div>{`You voted for ${getAnswerText(question, user)}`} </div>
               <div>{getAnswerStatistics(question)}</div>
               <Link to="/">Back to home</Link>

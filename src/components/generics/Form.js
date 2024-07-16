@@ -3,7 +3,7 @@ import Input from "./Input";
 import Button from "./Button";
 import Message from "./Message";
 import {
-  ERROR,
+  FORM_ERROR,
   toObject,
   validateConfirmPassword,
   validatePassword,
@@ -47,14 +47,16 @@ function Form(props) {
       return (
         (mode === "login" ? !input.value : !validatePassword(input)) &&
         input.touched &&
-        ERROR[`${code}_${mode.toUpperCase()}`]
+        FORM_ERROR[`${code}_${mode.toUpperCase()}`]
       );
     } else if (input.name === "confirm-password") {
       return (
-        !validateConfirmPassword(inputGroup) && input.touched && ERROR[code]
+        !validateConfirmPassword(inputGroup) &&
+        input.touched &&
+        FORM_ERROR[code]
       );
     } else {
-      return !input.value && input.touched && ERROR[code];
+      return !input.value && input.touched && FORM_ERROR[code];
     }
   };
 

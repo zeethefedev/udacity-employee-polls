@@ -1,58 +1,58 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { _getUsers, _saveUser } from "../api/_DATA";
+import { ERROR } from "../utils/utils.user";
 
 //login
 export const login = createAsyncThunk("/login", async (user) => {
   const { username, password } = user;
-  let response = { mode: "login" };
-  await _getUsers().then((users) => {
+  const userData = await _getUsers().then((users) => {
     const currentUser = users[username];
     if (currentUser) {
       if (currentUser.password === password) {
-        response.user = currentUser;
+        return currentUser;
       } else {
-        response.error = { code: "password" }; // wrong password
+        throw Error(ERROR.LOGIN_PASSWORD);
       }
     } else {
-      response.error = { code: "username" }; // cannot find user
+      throw Error(ERROR.LOGIN_USERNAME);
     }
   });
-  return response;
+  return { mode: "login", user: userData };
 });
 
 //signup
 export const signup = createAsyncThunk("/signup", async (user) => {
-  let response = { mode: "signup" };
-  await _saveUser(user)
+  const userData = await _saveUser(user)
     .then((newUser) => {
-      response.user = newUser;
+      return newUser;
     })
     .catch((error) => {
-      response.error = { code: "signup", message: error };
+      throw Error(error);
     });
-  return response;
+  return { mode: "signup", user: userData };
 });
 
 export const getAllUsers = createAsyncThunk("/get-users", async () => {
-  let response = {};
-  await _getUsers().then((users) => {
+  const users = await _getUsers().then((users) => {
     const userList = Object.values(users);
-    response.users = userList;
     if (!users) {
-      response.error = { code: "get-users" };
+      throw Error(ERROR.GET_USERS);
+    } else {
+      return userList;
     }
   });
-  return response;
+  return { users };
 });
 
 export const getUserById = createAsyncThunk("/get-user", async (userId) => {
-  let response = {};
-  await _getUsers().then((users) => {
+  const user = await _getUsers().then((users) => {
     const userList = Object.values(users);
-    response.user = userList.find((user) => user.id === userId);
-    if (!response.user) {
-      response.error = { code: "get-user" };
+    const userData = userList.find((user) => user.id === userId);
+    if (!userData) {
+      throw Error(ERROR.GET_USER);
+    } else {
+      return userData;
     }
   });
-  return response;
+  return { user };
 });

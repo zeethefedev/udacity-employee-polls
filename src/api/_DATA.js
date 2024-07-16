@@ -1,4 +1,4 @@
-import { formatUser } from "../utils/utils.user";
+import { ERROR, formatUser } from "../utils/utils.user";
 import { formatQuestion, getVotes } from "../utils/utils.question";
 
 let users = {
@@ -149,7 +149,7 @@ export function _saveUser(user) {
 
   return new Promise((resolve, reject) => {
     if (userIds.includes(username)) {
-      reject("User already exists");
+      reject(ERROR.SIGNUP);
     }
 
     const formattedUser = formatUser(user);

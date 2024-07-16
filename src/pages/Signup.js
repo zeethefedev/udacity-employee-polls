@@ -4,7 +4,7 @@ import { validateSignupForm } from "../utils/utils.user";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { signup } from "../store/user.thunk";
-import { resetLoginForm } from "../store/user.reducer";
+import { resetForm } from "../store/user.reducer";
 
 function Signup() {
   const dispatch = useDispatch();
@@ -18,13 +18,14 @@ function Signup() {
       );
       dispatch(signup({ username, displayName, password }))
         .unwrap()
-        .then(() => navigate("/"));
+        .then(() => navigate("/"))
+        .catch(() => {});
     }
   };
 
   const handleNavigate = () => {
     navigate("/login");
-    dispatch(resetLoginForm());
+    dispatch(resetForm());
   };
 
   const buttonDisabled = (inputGroup) =>
