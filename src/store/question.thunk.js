@@ -4,58 +4,52 @@ import {
   _saveQuestion,
   _saveQuestionAnswer,
 } from "../api/_DATA";
+import { ERROR } from "../utils/utils.question";
 
 export const getAllQuestions = createAsyncThunk("/get-questions", async () => {
-  let response = {};
-  await _getQuestions().then((questions) => {
-    const questionsList = Object.values(questions);
-    response.questions = questionsList;
+  const questions = await _getQuestions().then((questions) => {
     if (!questions) {
-      response.error = { code: "get-questions" };
+      throw Error(ERROR.GET_QUESTIONS);
     }
+    return Object.values(questions);
   });
-  return response;
+  return { questions };
 });
 
 export const getQuestionById = createAsyncThunk(
   "/get-question",
   async (questionId) => {
-    let response = {};
-    await _getQuestions().then((questions) => {
+    const question = await _getQuestions().then((questions) => {
       const questionsList = Object.values(questions);
-      response.question = questionsList.find(
+      const questionData = questionsList.find(
         (questions) => questions.id === questionId
       );
-      if (!response.question) {
-        response.error = { code: "get-question" };
+      if (!questionData) {
+        throw Error(ERROR.GET_QUESTION);
       }
+      return questionData;
     });
-    return response;
+    return { question };
   }
 );
 
 export const addQuestion = createAsyncThunk(
   "/add-question",
   async (question) => {
-    let response = {};
-    await _saveQuestion(question).then((newQuestion) => {
-      response.question = newQuestion;
-    });
-    return response;
+    const questionData = await _saveQuestion(question);
+    return { question: questionData };
   }
 );
 
 export const updateQuestionAnswer = createAsyncThunk(
   "/update-answer",
   async (data) => {
-    let response = {};
-    await _saveQuestionAnswer(data).then((newQuestion) => {
-      if (newQuestion) {
-        response.question = newQuestion;
-      } else {
-        response.error = { code: "update" };
+    const questionData = await _saveQuestionAnswer(data).then((newQuestion) => {
+      if (!newQuestion) {
+        throw Error(ERROR.ADD_QUESTION);
       }
+      return newQuestion;
     });
-    return response;
+    return { question: questionData };
   }
 );

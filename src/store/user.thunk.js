@@ -37,9 +37,8 @@ export const getAllUsers = createAsyncThunk("/get-users", async () => {
     const userList = Object.values(users);
     if (!users) {
       throw Error(ERROR.GET_USERS);
-    } else {
-      return userList;
     }
+    return userList;
   });
   return { users };
 });
@@ -50,9 +49,8 @@ export const getUserById = createAsyncThunk("/get-user", async (userId) => {
     const userData = userList.find((user) => user.id === userId);
     if (!userData) {
       throw Error(ERROR.GET_USER);
-    } else {
-      return userData;
     }
+    return userData;
   });
   return { user };
 });

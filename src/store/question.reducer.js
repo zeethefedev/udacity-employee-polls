@@ -22,43 +22,27 @@ export const questionSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getAllQuestions.fulfilled, (state, action) => {
-        const { questions, error } = action.payload;
-        if (error) {
-          state.error = true;
-        } else {
-          state.questions = questions;
-        }
+        const { questions } = action.payload;
+        state.questions = questions;
         state.loading = false;
       })
       .addCase(getQuestionById.fulfilled, (state, action) => {
-        const { question, error } = action.payload;
-        if (error) {
-          state.error = true;
-        } else {
-          state.currentQuestion = question;
-        }
+        const { question } = action.payload;
+        state.currentQuestion = question;
         state.loading = false;
       })
       .addCase(getUserById.fulfilled, (state, action) => {
-        const { user, error } = action.payload;
-        if (error) {
-          state.error = true;
-        } else {
-          state.author = user;
-        }
+        const { user } = action.payload;
+        state.author = user;
         state.loading = false;
       })
       .addCase(updateQuestionAnswer.fulfilled, (state, action) => {
-        const { question, error } = action.payload;
-        if (error) {
-          state.error = true;
-        } else {
-          state.currentQuestion = question;
-          const newQuestions = state.questions.map((quest) =>
-            quest.id === question.id ? question : quest
-          );
-          state.questions = newQuestions;
-        }
+        const { question } = action.payload;
+        state.currentQuestion = question;
+        const newQuestions = state.questions.map((quest) =>
+          quest.id === question.id ? question : quest
+        );
+        state.questions = newQuestions;
         state.loading = false;
       })
       .addCase(addQuestion.fulfilled, (state, action) => {
@@ -68,6 +52,20 @@ export const questionSlice = createSlice({
         state.message = MESSAGES.ADD_QUESTION_SUCCESS;
         state.loading = false;
       })
+      .addMatcher(
+        isAnyOf(
+          getAllQuestions.rejected,
+          getQuestionById.rejected,
+          updateQuestionAnswer.rejected,
+          addQuestion.rejected
+        ),
+        (state, action) => {
+          const { message } = action.error;
+          state.error = true;
+          state.message = message;
+          state.loading = false;
+        }
+      )
       .addMatcher(
         isAnyOf(
           getAllQuestions.pending,

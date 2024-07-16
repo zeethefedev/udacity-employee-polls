@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Button from "../generics/Button";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -18,6 +18,7 @@ import Loading from "../generics/Loading";
 function QuestionDetail({ user }) {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const question = useSelector((state) => state.question.currentQuestion);
   const author = useSelector((state) => state.question.author);
   const loading = useSelector((state) => state.question.loading);
@@ -29,7 +30,8 @@ function QuestionDetail({ user }) {
       .then((res) => {
         const author = res.question.author;
         dispatch(getUserById(author));
-      });
+      })
+      .catch(() => navigate("/error"));
   }, []);
 
   const handleSetAnswer = (answer) => {

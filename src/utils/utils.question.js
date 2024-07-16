@@ -1,3 +1,8 @@
+export const ERROR = {
+  GET_QUESTIONS: "Cannot get questions",
+  GET_QUESTION: "Cannot get question",
+  ADD_QUESTION: "Cannot add question. Please try again",
+};
 export const MESSAGES = {
   ADD_QUESTION_SUCCESS: "Question added successfully",
 };
