@@ -16,10 +16,7 @@ function Signup() {
       const [username, displayName, password] = inputGroup.map(
         (input) => input.value
       );
-      dispatch(signup({ username, displayName, password }))
-        .unwrap()
-        .then(() => navigate("/"))
-        .catch(() => {});
+      dispatch(signup({ username, displayName, password }));
     }
   };
 

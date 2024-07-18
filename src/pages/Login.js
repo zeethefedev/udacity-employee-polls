@@ -13,10 +13,7 @@ function Login() {
     const validForm = inputGroup.every((input) => input.value && input.touched);
     if (validForm) {
       const [username, password] = inputGroup.map((input) => input.value);
-      dispatch(login({ username, password }))
-        .unwrap()
-        .then(() => navigate("/"))
-        .catch(() => {});
+      dispatch(login({ username, password }));
     }
   };
 

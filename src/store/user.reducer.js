@@ -1,11 +1,6 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { getAllUsers, login, signup } from "./user.thunk";
-import {
-  MESSAGES,
-  clearStorage,
-  getFromStorage,
-  saveToStorage,
-} from "../utils/utils.user";
+import { MESSAGES, getFromStorage } from "../utils/utils.user";
 
 export const userSlice = createSlice({
   name: "user",
@@ -30,7 +25,6 @@ export const userSlice = createSlice({
       state.error = false;
       state.message = "";
       state.loading = false;
-      clearStorage("USER");
     },
   },
   extraReducers: (builder) => {
@@ -54,7 +48,6 @@ export const userSlice = createSlice({
           const { mode, user } = action.payload;
           state.currentUser = user;
           state.message = MESSAGES[`${mode.toUpperCase()}_SUCCESS`];
-          saveToStorage("USER", user);
           state.loading = false;
         }
       )
@@ -65,7 +58,6 @@ export const userSlice = createSlice({
           state.error = true;
           state.message = message;
           state.loading = false;
-          clearStorage("USER");
         }
       );
   },

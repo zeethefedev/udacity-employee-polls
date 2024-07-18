@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Button from "../generics/Button";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -12,26 +12,18 @@ import {
   questionHasVote,
 } from "../../utils/utils.question";
 import Card from "../generics/Card";
-import { getUserById } from "../../store/user.thunk";
 import Loading from "../generics/Loading";
 
 function QuestionDetail({ user }) {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const question = useSelector((state) => state.question.currentQuestion);
   const author = useSelector((state) => state.question.author);
   const loading = useSelector((state) => state.question.loading);
   const isQuestionsAnswered = question && questionHasVote(question, user);
 
   useEffect(() => {
-    dispatch(getQuestionById(id))
-      .unwrap()
-      .then((res) => {
-        const author = res.question.author;
-        dispatch(getUserById(author));
-      })
-      .catch(() => navigate("/error"));
+    dispatch(getQuestionById(id));
   }, []);
 
   const handleSetAnswer = (answer) => {
