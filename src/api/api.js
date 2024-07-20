@@ -2,36 +2,40 @@ import { updateVotes } from "../utils/utils.question";
 import { formatUser } from "../utils/utils.user";
 
 const URL = "http://localhost:3001";
+
+const fetchAPI = async (url, method, body) => {
+  const request = method && {
+    method,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  };
+  const response = await fetch(`${URL}/${url}`, request);
+  return response.json();
+};
+
+const post = async (url, body) => {
+  const postRes = await fetchAPI(url, "POST", body);
+  return postRes;
+};
+
+const patch = async (url, body) => {
+  const patchRes = fetchAPI(url, "PATCH", body);
+  return patchRes;
+};
+
 export async function _getUsers() {
-  try {
-    const response = await fetch(`${URL}/users`);
-    return response.json();
-  } catch (error) {
-    console.error(error.message);
-  }
+  return await fetchAPI("users");
 }
 
 export async function _getUserById(userId) {
-  try {
-    const response = await fetch(`${URL}/users/${userId}`);
-    return response.json();
-  } catch (error) {
-    console.error(error.message);
-  }
+  return await fetchAPI(`users/${userId}`);
 }
 
 export async function _saveUser(user) {
   const formattedUser = formatUser(user);
-  const response = await fetch(`${URL}/users`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formattedUser),
-  });
-
-  const data = await response.json();
-  return data;
+  return await post("/users", formattedUser);
 }
 
 export async function _updateUserQuestion(question) {
@@ -44,15 +48,7 @@ export async function _updateUserQuestion(question) {
   const newQuestions = await { questions: [...questions, questionId] };
 
   // add the existing question array
-  const response = await fetch(`${URL}/users/${userId}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(newQuestions),
-  });
-  const data = await response.json();
-  return data;
+  return await patch(`users/${userId}`, newQuestions);
 }
 
 export async function _updateUserAnswer({ userId, questionId, answer }) {
@@ -67,46 +63,20 @@ export async function _updateUserAnswer({ userId, questionId, answer }) {
   };
 
   // add the existing answer object
-  const response = await fetch(`${URL}/users/${userId}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(newAnswers),
-  });
-  const data = await response.json();
-  return data;
+  return await patch(`users/${userId}`, newAnswers);
 }
 
 // questions
 export async function _getQuestions() {
-  try {
-    const response = await fetch(`${URL}/questions`);
-    return response.json();
-  } catch (error) {
-    console.error(error.message);
-  }
+  return await fetchAPI("questions");
 }
 
 export async function _getQuestionById(questionId) {
-  try {
-    const response = await fetch(`${URL}/questions/${questionId}`);
-    return response.json();
-  } catch (error) {
-    console.error(error.message);
-  }
+  return await fetchAPI(`questions/${questionId}`);
 }
 
 export async function _saveQuestion(question) {
-  const response = await fetch(`${URL}/questions`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(question),
-  });
-  const data = await response.json();
-  return data;
+  return await post("questions", question);
 }
 
 export async function _updateQuestionAnswer({ userId, questionId, answer }) {
@@ -114,13 +84,5 @@ export async function _updateQuestionAnswer({ userId, questionId, answer }) {
   const question = await _getQuestionById(questionId);
   const newVotes = updateVotes(question, userId, answer);
 
-  const response = await fetch(`${URL}/questions/${questionId}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(newVotes),
-  });
-  const data = await response.json();
-  return data;
+  return await patch(`questions/${questionId}`, newVotes);
 }
