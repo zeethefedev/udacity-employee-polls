@@ -3,11 +3,11 @@ import Input from "./Input";
 import Button from "./Button";
 import Message from "./Message";
 import {
-  FORM_ERROR,
   toObject,
   validateConfirmPassword,
   validatePassword,
 } from "../../utils/utils.user";
+import { FORM_ERROR } from "../../utils/utils";
 
 function Form(props) {
   const {

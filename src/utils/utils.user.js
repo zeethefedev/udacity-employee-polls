@@ -9,12 +9,7 @@ export function formatUser({ username, displayName, password }) {
   };
 }
 
-export const FORM_ERROR = {
-  USERNAME: "Invalid username",
-  PASSWORD: "Invalid password",
-  OPTION_ONE: "Please fill in the field",
-  OPTION_TWO: "Please fill in the field",
-};
+export const DEFAULT_AVATAR = "/avatar/default-avatar.svg";
 
 export const ERROR = {
   LOGIN_USERNAME: "We cannot find the user",
