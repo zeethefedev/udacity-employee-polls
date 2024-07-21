@@ -1,6 +1,6 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { getAllUsers, login } from "./user.thunk";
-import { MESSAGES, getFromStorage } from "../utils/utils.user";
+import { ERROR, MESSAGES, getFromStorage } from "../utils/utils.user";
 
 export const userSlice = createSlice({
   name: "user",
@@ -43,20 +43,20 @@ export const userSlice = createSlice({
         state.loading = true;
       })
       .addCase(login.fulfilled, (state, action) => {
-        const { user } = action.payload;
+        const { mode, user } = action.payload;
         state.currentUser = user;
-        state.message = MESSAGES.LOGIN_SUCCESS;
+        state.message = MESSAGES[`${mode.toUpperCase()}_SUCCESS`];
         state.loading = false;
       })
-      .addMatcher(
-        isAnyOf(login.rejected, getAllUsers.rejected),
-        (state, action) => {
-          const { message } = action.error;
-          state.error = true;
-          state.message = message;
-          state.loading = false;
-        }
-      );
+      .addCase(login.rejected, (state, action) => {
+        const { type, error } = action;
+        const { message } = error;
+        const key = type.split("/")[1]?.replace("-", "_").toUpperCase();
+
+        state.error = true;
+        state.message = ERROR[key] || message;
+        state.loading = false;
+      });
   },
 });
 
