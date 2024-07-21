@@ -1,6 +1,6 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { getAllUsers, login, signup } from "./user.thunk";
-import { MESSAGES, getFromStorage } from "../utils/utils.user";
+import { ERROR, MESSAGES, getFromStorage } from "../utils/utils.user";
 
 export const userSlice = createSlice({
   name: "user",
@@ -51,15 +51,15 @@ export const userSlice = createSlice({
           state.loading = false;
         }
       )
-      .addMatcher(
-        isAnyOf(login.rejected, signup.rejected, getAllUsers.rejected),
-        (state, action) => {
-          const { message } = action.error;
-          state.error = true;
-          state.message = message;
-          state.loading = false;
-        }
-      );
+      .addMatcher(isAnyOf(login.rejected, signup.rejected), (state, action) => {
+        const { type, error } = action;
+        const { message } = error;
+        const key = type.split("/")[1]?.replace("-", "_").toUpperCase();
+
+        state.error = true;
+        state.message = ERROR[key] || message;
+        state.loading = false;
+      });
   },
 });
 
