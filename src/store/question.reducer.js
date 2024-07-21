@@ -6,7 +6,7 @@ import {
   updateQuestionAnswer,
 } from "./question.thunk";
 import { getUserById } from "./user.thunk";
-import { MESSAGES } from "../utils/utils.question";
+import { ERROR, MESSAGES } from "../utils/utils.question";
 
 export const questionSlice = createSlice({
   name: "question",
@@ -53,16 +53,14 @@ export const questionSlice = createSlice({
         state.loading = false;
       })
       .addMatcher(
-        isAnyOf(
-          getAllQuestions.rejected,
-          getQuestionById.rejected,
-          updateQuestionAnswer.rejected,
-          addQuestion.rejected
-        ),
+        isAnyOf(updateQuestionAnswer.rejected, addQuestion.rejected),
         (state, action) => {
-          const { message } = action.error;
+          const { type, error } = action;
+          const { message } = error;
+          const key = type.split("/")[1]?.replace("-", "_").toUpperCase();
+
           state.error = true;
-          state.message = message;
+          state.message = ERROR[key] || message;
           state.loading = false;
         }
       )

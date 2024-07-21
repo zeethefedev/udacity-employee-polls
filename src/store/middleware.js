@@ -14,12 +14,16 @@ export const redirect =
     const isLoginSignup = ["login", "signup"].some((actionType) =>
       type.includes(actionType)
     );
+    const isAddUpdateQuestion = ["add-question", "update-answer"].some(
+      (actionType) => type.includes(actionType)
+    );
 
     if (isLoginSignup && type.includes("fulfilled")) {
       actions = [...actions, redirectTo("/")];
     }
 
-    if (!isLoginSignup && error) return redirectTo("/error");
+    if (!isLoginSignup && !isAddUpdateQuestion && error)
+      return redirectTo("/error");
 
     if (type === "/get-question/fulfilled") {
       const author = payload.question.author;
