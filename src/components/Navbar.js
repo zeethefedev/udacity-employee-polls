@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { logout } from "../store/user.reducer";
 import { Link } from "react-router-dom";
 import SVGIcon from "./generics/SVGIcon";
+import { DEFAULT_AVATAR } from "../utils/utils.user";
 
 const PAGES = ["home", "leaderboard", "add"];
 
@@ -45,7 +46,11 @@ function Navbar({ user }) {
         </div>
         <div className="flex gap-8">
           <div className="flex gap-4">
-            <img className="avatar w-12 h-12" src={avatarURL} alt={id} />
+            <img
+              className="avatar w-12 h-12"
+              src={avatarURL || DEFAULT_AVATAR}
+              alt={id}
+            />
             <div className="text-left">
               <div>{name}</div>
               <div>{id}</div>

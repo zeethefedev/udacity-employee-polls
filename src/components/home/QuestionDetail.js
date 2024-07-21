@@ -13,6 +13,7 @@ import {
 } from "../../utils/utils.question";
 import Card from "../generics/Card";
 import Loading from "../generics/Loading";
+import { DEFAULT_AVATAR } from "../../utils/utils.user";
 
 function QuestionDetail({ user }) {
   const { id } = useParams();
@@ -39,7 +40,7 @@ function QuestionDetail({ user }) {
           <div>{question.author} asked</div>
           <img
             className="w-48 h-48"
-            src={author.avatarURL}
+            src={author.avatarURL || DEFAULT_AVATAR}
             alt={question.author}
           />
           <h2>Would your rather...</h2>

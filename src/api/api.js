@@ -35,7 +35,7 @@ export async function _getUserById(userId) {
 
 export async function _saveUser(user) {
   const formattedUser = formatUser(user);
-  return await post("/users", formattedUser);
+  return await post("users", formattedUser);
 }
 
 export async function _updateUserQuestion(question) {
