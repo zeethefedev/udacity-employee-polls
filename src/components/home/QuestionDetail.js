@@ -27,9 +27,9 @@ function QuestionDetail({ user }) {
   }, []);
 
   const handleSetAnswer = (answer) => {
-    const authedUser = user.id;
-    const qid = question.id;
-    dispatch(updateQuestionAnswer({ authedUser, qid, answer }));
+    const userId = user.id;
+    const questionId = question.id;
+    dispatch(updateQuestionAnswer({ userId, questionId, answer }));
   };
 
   return (

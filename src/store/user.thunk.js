@@ -1,12 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { _getUsers, _saveUser } from "../api/_DATA";
 import { ERROR } from "../utils/utils.user";
+import { _getUserById, _getUsers, _saveUser } from "../api/api";
 
 //login
 export const login = createAsyncThunk("/login", async (user) => {
   const { username, password } = user;
   const userData = await _getUsers().then((users) => {
-    const currentUser = users[username];
+    const currentUser = users.find((user) => user.id === username);
     if (currentUser) {
       if (currentUser.password === password) {
         return currentUser;
@@ -34,7 +34,7 @@ export const signup = createAsyncThunk("/signup", async (user) => {
 
 export const getAllUsers = createAsyncThunk("/get-users", async () => {
   const users = await _getUsers().then((users) => {
-    const userList = Object.values(users);
+    const userList = users;
     if (!users) {
       throw Error(ERROR.GET_USERS);
     }
@@ -44,13 +44,11 @@ export const getAllUsers = createAsyncThunk("/get-users", async () => {
 });
 
 export const getUserById = createAsyncThunk("/get-user", async (userId) => {
-  const user = await _getUsers().then((users) => {
-    const userList = Object.values(users);
-    const userData = userList.find((user) => user.id === userId);
-    if (!userData) {
+  const user = await _getUserById(userId).then((user) => {
+    if (!user) {
       throw Error(ERROR.GET_USER);
     }
-    return userData;
+    return user;
   });
   return { user };
 });

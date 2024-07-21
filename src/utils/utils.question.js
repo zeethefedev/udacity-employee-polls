@@ -70,19 +70,19 @@ export const getAnswerText = (question, user) => {
   else return two.text;
 };
 
-export const getVotes = (questions, authedUser, qid, answer) => {
-  const votes = [...questions[qid][answer].votes, authedUser];
+export const updateVotes = (question, authedUser, answer) => {
+  const votes = [...question[answer].votes, authedUser];
   const otherAnswer = answer === "optionOne" ? "optionTwo" : "optionOne";
-  const otherVotes = questions[qid][otherAnswer].votes.filter(
+  const otherVotes = question[otherAnswer].votes.filter(
     (user) => user !== authedUser
   );
   const votesObject = {
     [answer]: {
-      ...questions[qid][answer],
+      ...question[answer],
       votes: [...new Set(votes)], // each user can only vote once
     },
     [otherAnswer]: {
-      ...questions[qid][otherAnswer],
+      ...question[otherAnswer],
       votes: otherVotes, // remove user from other vote if already voted
     },
   };
