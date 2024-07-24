@@ -25,11 +25,9 @@ function Form(props) {
   const [inputGroup, setInputGroup] = useState(toObject(initialInputs));
 
   const handleChange = (e) => {
-    const newValue = e.target.value;
+    const value = e.target.value;
     const newInputs = inputGroup.map((input) =>
-      input.name === e.target.name
-        ? { ...input, value: newValue, touched: true }
-        : input
+      input.name === e.target.name ? { ...input, value, touched: true } : input
     );
     setInputGroup(newInputs);
   };
@@ -43,20 +41,19 @@ function Form(props) {
 
   const errorField = (input) => {
     const code = `${input.name.toUpperCase().replaceAll("-", "_")}`;
-    if (input.name === "password") {
+    const { name, value, touched } = input;
+    if (name === "password") {
       return (
-        (mode === "login" ? !input.value : !validatePassword(input)) &&
-        input.touched &&
+        (mode === "login" ? !value : !validatePassword(input)) &&
+        touched &&
         FORM_ERROR[`${code}_${mode.toUpperCase()}`]
       );
-    } else if (input.name === "confirm-password") {
+    } else if (name === "confirm-password") {
       return (
-        !validateConfirmPassword(inputGroup) &&
-        input.touched &&
-        FORM_ERROR[code]
+        !validateConfirmPassword(inputGroup) && touched && FORM_ERROR[code]
       );
     } else {
-      return !input.value && input.touched && FORM_ERROR[code];
+      return !value && touched && FORM_ERROR[code];
     }
   };
 

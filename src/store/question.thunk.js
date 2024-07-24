@@ -28,7 +28,7 @@ export const addQuestion = createAsyncThunk(
     const formattedQuestion = formatQuestion(question);
     const questionData = await _saveQuestion(formattedQuestion);
     // add question id to the author
-    const authorData = await _updateUserQuestion(formattedQuestion);
+    await _updateUserQuestion(formattedQuestion);
     return { question: questionData };
   }
 );
@@ -36,7 +36,7 @@ export const addQuestion = createAsyncThunk(
 export const updateQuestionAnswer = createAsyncThunk(
   "/update-answer",
   async (data) => {
-    const userData = await _updateUserAnswer(data);
+    await _updateUserAnswer(data);
     const questionData = await _updateQuestionAnswer(data);
     return { question: questionData };
   }

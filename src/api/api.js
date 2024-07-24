@@ -25,6 +25,7 @@ const patch = async (url, body) => {
   return patchRes;
 };
 
+// user API
 export async function _getUsers() {
   return await fetchAPI("users");
 }
@@ -66,7 +67,7 @@ export async function _updateUserAnswer({ userId, questionId, answer }) {
   return await patch(`users/${userId}`, newAnswers);
 }
 
-// questions
+// questions API
 export async function _getQuestions() {
   return await fetchAPI("questions");
 }

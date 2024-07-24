@@ -1,5 +1,6 @@
 import React from "react";
 
+// source: https://reactsvgicons.com/
 const ICONS = {
   eye: {
     render: (

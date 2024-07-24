@@ -18,7 +18,6 @@ export const questionSlice = createSlice({
     loading: false,
     message: "",
   },
-  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getAllQuestions.fulfilled, (state, action) => {
@@ -79,7 +78,5 @@ export const questionSlice = createSlice({
       );
   },
 });
-
-export const {} = questionSlice.actions;
 
 export default questionSlice.reducer;
