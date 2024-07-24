@@ -5,7 +5,9 @@ import { _getUserById, _getUsers, _saveUser } from "../api/api";
 //login
 export const login = createAsyncThunk("/login", async (user) => {
   const { username, password } = user;
-  const userData = await _getUserById(username);
+  const userData = await _getUserById(username).catch(() => {
+    throw Error(ERROR.LOGIN);
+  });
 
   if (userData.password !== password) {
     throw Error(ERROR.LOGIN_PASSWORD);
@@ -17,7 +19,8 @@ export const login = createAsyncThunk("/login", async (user) => {
 //signup
 export const signup = createAsyncThunk("/signup", async (user) => {
   // get all users and check that user id do not exist
-  const userExists = await _getUserById(user.username);
+  const userExists = await _getUserById(user.username).catch(() => {});
+
   if (userExists) {
     throw Error(ERROR.SIGNUP);
   }

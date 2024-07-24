@@ -59,8 +59,8 @@ export const getAnswerStatistics = (question) => {
   const textTwo = question.optionTwo.text;
   const votesOne = question.optionOne.votes.length;
   const votesTwo = question.optionTwo.votes.length;
-  const answerPercentOne = (votesOne / (votesOne + votesTwo)).toFixed(2);
-  const answerPercentTwo = (votesTwo / (votesOne + votesTwo)).toFixed(2);
+  const answerPercentOne = (votesOne / (votesOne + votesTwo)).toFixed(2) * 100;
+  const answerPercentTwo = (votesTwo / (votesOne + votesTwo)).toFixed(2) * 100;
   return `${votesOne} (${answerPercentOne}%) employees vote for ${textOne} and ${votesTwo} (${answerPercentTwo}%) employees vote for ${textTwo}.`;
 };
 

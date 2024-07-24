@@ -52,12 +52,9 @@ export const userSlice = createSlice({
         }
       )
       .addMatcher(isAnyOf(login.rejected, signup.rejected), (state, action) => {
-        const { type, error } = action;
-        const { message } = error;
-        const key = type.split("/")[1]?.replace("-", "_").toUpperCase();
-
+        const { message } = action.error;
         state.error = true;
-        state.message = ERROR[key] || message;
+        state.message = message;
         state.loading = false;
       });
   },
