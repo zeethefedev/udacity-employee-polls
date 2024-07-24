@@ -46,7 +46,7 @@ function QuestionDetail({ user }) {
           <h2>Would your rather...</h2>
           <div className="flex gap-2">
             {["optionOne", "optionTwo"].map((option) => (
-              <Button onClick={() => handleSetAnswer(option)}>
+              <Button key={option} onClick={() => handleSetAnswer(option)}>
                 {question[option].text}
               </Button>
             ))}

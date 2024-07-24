@@ -54,6 +54,7 @@ function Form(props) {
       <h2>{heading}</h2>
       {inputGroup.map((input) => (
         <Input
+          key={input.name}
           type={typeField(input)}
           label={`${input.name.replaceAll("-", " ")}: `}
           name={input.name}

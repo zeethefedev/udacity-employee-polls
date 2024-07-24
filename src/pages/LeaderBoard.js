@@ -27,7 +27,8 @@ function LeaderBoard() {
             <th>Answers</th>
             <th>Questions</th>
           </tr>
-          {users && sortedUsers.map((user) => <LeaderRow user={user} />)}
+          {users &&
+            sortedUsers.map((user) => <LeaderRow key={user.id} user={user} />)}
         </table>
       )}
     </div>

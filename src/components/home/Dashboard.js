@@ -10,7 +10,7 @@ function QuestionList({ questions }) {
   return (
     <div className="grid gap-6 md:grid-cols-2">
       {questions.map((question) => (
-        <QuestionCard question={question} />
+        <QuestionCard key={question.id} question={question} />
       ))}
     </div>
   );
