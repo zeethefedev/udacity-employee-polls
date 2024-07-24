@@ -11,6 +11,7 @@ const PAGES = ["home", "leaderboard", "add"];
 function Pages({ pages }) {
   return pages.map((page) => (
     <Link
+      key={page}
       className="font-semibold capitalize hover:underline"
       to={page === "home" ? "" : page}
     >
