@@ -9,9 +9,13 @@
         "8xf0y6ziyjabvozdd253nd": "optionOne",
         "6ni6ok3ym7mf1p33lnez": "optionOne",
         "am8ehyc8byjqgar0jgpub9": "optionTwo",
-        "loxhs1bqm25b708cmbf3g": "optionTwo"
+        "loxhs1bqm25b708cmbf3g": "optionTwo",
+        "co5r079h14fegbbz4x2mok": "optionOne"
       },
-      "questions": ["8xf0y6ziyjabvozdd253nd", "am8ehyc8byjqgar0jgpub9"]
+      "questions": [
+        "8xf0y6ziyjabvozdd253nd",
+        "am8ehyc8byjqgar0jgpub9"
+      ]
     },
     {
       "id": "tylermcginnis",
@@ -20,9 +24,15 @@
       "avatarURL": "/avatar/tylermcginnis.svg",
       "answers": {
         "vthrdm985a262al8qx3do": "optionOne",
-        "xj352vofupe1dqz9emx13r": "optionTwo"
+        "xj352vofupe1dqz9emx13r": "optionTwo",
+        "am8ehyc8byjqgar0jgpub9": "optionTwo",
+        "loxhs1bqm25b708cmbf3g": "optionTwo",
+        "6ni6ok3ym7mf1p33lnez": "optionTwo"
       },
-      "questions": ["loxhs1bqm25b708cmbf3g", "vthrdm985a262al8qx3do"]
+      "questions": [
+        "loxhs1bqm25b708cmbf3g",
+        "vthrdm985a262al8qx3do"
+      ]
     },
     {
       "id": "mtsamis",
@@ -34,7 +44,10 @@
         "vthrdm985a262al8qx3do": "optionTwo",
         "6ni6ok3ym7mf1p33lnez": "optionOne"
       },
-      "questions": ["6ni6ok3ym7mf1p33lnez", "xj352vofupe1dqz9emx13r"]
+      "questions": [
+        "6ni6ok3ym7mf1p33lnez",
+        "xj352vofupe1dqz9emx13r"
+      ]
     },
     {
       "id": "zoshikanlu",
@@ -45,6 +58,14 @@
         "xj352vofupe1dqz9emx13r": "optionOne"
       },
       "questions": []
+    },
+    {
+      "id": "erwe",
+      "password": "1",
+      "name": "werw",
+      "avatarURL": null,
+      "answers": {},
+      "questions": []
     }
   ],
   "questions": [
@@ -53,7 +74,9 @@
       "author": "sarahedo",
       "timestamp": 1467166872634,
       "optionOne": {
-        "votes": ["sarahedo"],
+        "votes": [
+          "sarahedo"
+        ],
         "text": "Build our new application with Javascript"
       },
       "optionTwo": {
@@ -70,7 +93,11 @@
         "text": "hire more frontend developers"
       },
       "optionTwo": {
-        "votes": ["mtsamis", "sarahedo"],
+        "votes": [
+          "mtsamis",
+          "sarahedo",
+          "tylermcginnis"
+        ],
         "text": "hire more backend developers"
       }
     },
@@ -83,7 +110,10 @@
         "text": "conduct a release retrospective 1 week after a release"
       },
       "optionTwo": {
-        "votes": ["sarahedo"],
+        "votes": [
+          "sarahedo",
+          "tylermcginnis"
+        ],
         "text": "conduct release retrospectives quarterly"
       }
     },
@@ -96,7 +126,10 @@
         "text": "have code reviews conducted by peers"
       },
       "optionTwo": {
-        "votes": ["sarahedo"],
+        "votes": [
+          "sarahedo",
+          "tylermcginnis"
+        ],
         "text": "have code reviews conducted by managers"
       }
     },
@@ -105,11 +138,16 @@
       "author": "tylermcginnis",
       "timestamp": 1489579767190,
       "optionOne": {
-        "votes": ["tylermcginnis"],
+        "votes": [
+          "tylermcginnis"
+        ],
         "text": "take a course on ReactJS"
       },
       "optionTwo": {
-        "votes": ["mtsamis", "zoshikanlu"],
+        "votes": [
+          "mtsamis",
+          "zoshikanlu"
+        ],
         "text": "take a course on unit testing with Jest"
       }
     },
@@ -118,11 +156,16 @@
       "author": "mtsamis",
       "timestamp": 1493579767190,
       "optionOne": {
-        "votes": ["mtsamis", "zoshikanlu"],
+        "votes": [
+          "mtsamis",
+          "zoshikanlu"
+        ],
         "text": "deploy to production once every two weeks"
       },
       "optionTwo": {
-        "votes": ["tylermcginnis"],
+        "votes": [
+          "tylermcginnis"
+        ],
         "text": "deploy to production once every month"
       }
     },
@@ -131,7 +174,9 @@
       "timestamp": 1721490616127,
       "author": "sarahedo",
       "optionOne": {
-        "votes": [],
+        "votes": [
+          "sarahedo"
+        ],
         "text": "always have a slow Internet connection"
       },
       "optionTwo": {
