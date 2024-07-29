@@ -59,6 +59,7 @@ function Form(props) {
           value={input.value}
           onChange={handleChange}
           error={errorField(input)}
+          testId={input.name}
         />
       ))}
       {children}
