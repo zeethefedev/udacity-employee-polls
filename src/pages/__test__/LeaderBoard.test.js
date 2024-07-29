@@ -11,7 +11,7 @@ const MockLeaderBoard = () => {
 };
 
 describe("LeaderBoard", () => {
-  it("renders correctly", () => {
+  it("should renders correctly", () => {
     const { leaderboard } = render(<MockLeaderBoard />);
     expect(leaderboard).toMatchSnapshot();
   });

@@ -11,7 +11,7 @@ const MockAdd = () => {
 };
 
 describe("Add Form", () => {
-  it("renders correctly", () => {
+  it("should allow user to add new question", () => {
     const { add } = render(<MockAdd />);
     expect(add).toMatchSnapshot();
   });
