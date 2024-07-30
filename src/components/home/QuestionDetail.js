@@ -34,7 +34,10 @@ function QuestionDetail({ user }) {
   };
 
   return (
-    <Card className="question-card m-auto my-16 max-w-xl">
+    <Card
+      className="question-card m-auto my-16 max-w-xl"
+      testId="question-details"
+    >
       {question && (
         <>
           <div>{question.author} asked</div>

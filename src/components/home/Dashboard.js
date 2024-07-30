@@ -43,6 +43,7 @@ function Dashboard({ questions, user }) {
         onChange={handleShowAnswered}
         inputClass="w-auto"
         wrapperClass="flex justify-end"
+        testId="question-checkbox"
       />
       {showAnswered ? (
         <>
