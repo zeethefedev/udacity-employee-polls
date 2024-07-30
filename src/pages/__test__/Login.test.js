@@ -12,21 +12,21 @@ const MockLogin = () => {
 };
 
 describe("Login", () => {
-  // it("should prevent user from logging in with the wrong credential", async () => {
-  //   const { login } = render(<MockLogin />);
-  //   const usernameElement = screen.getByTestId("username");
-  //   const passwordElement = screen.getByTestId("password");
-  //   fireEvent.change(usernameElement, { target: { value: "sarahedo" } });
-  //   fireEvent.change(passwordElement, { target: { value: "password124" } });
+  it("should prevent user from logging in with the wrong credential", async () => {
+    render(<MockLogin />);
+    const usernameElement = screen.getByTestId("username");
+    const passwordElement = screen.getByTestId("password");
+    fireEvent.change(usernameElement, { target: { value: "sarahedo" } });
+    fireEvent.change(passwordElement, { target: { value: "password124" } });
 
-  //   const loginButton = screen.getByRole("button", { name: "login" });
-  //   fireEvent.click(loginButton);
-  //   const errorMessage = await screen.findByText(ERROR.LOGIN);
-  //   expect(errorMessage).toBeInTheDocument();
-  // });
+    const loginButton = screen.getByRole("button", { name: "login" });
+    fireEvent.click(loginButton);
+    const errorMessage = await screen.findByText(ERROR.LOGIN_PASSWORD);
+    expect(errorMessage).toBeInTheDocument();
+  });
 
   it("should allow user to log in with the right credential", async () => {
-    const { login } = render(<MockLogin />);
+    render(<MockLogin />);
     const usernameElement = screen.getByTestId("username");
     const passwordElement = screen.getByTestId("password");
     fireEvent.change(usernameElement, { target: { value: "sarahedo" } });
@@ -35,9 +35,7 @@ describe("Login", () => {
     const loginButton = screen.getByRole("button", { name: "login" });
     fireEvent.click(loginButton);
 
-    // const successMessage = await screen.findByText(MESSAGES.LOGIN_SUCCESS);
-    // expect(successMessage).toBeInTheDocument();
-
-    expect(login).toMatchSnapshot();
+    const successMessage = await screen.findByText(MESSAGES.LOGIN_SUCCESS);
+    expect(successMessage).toBeInTheDocument();
   });
 });

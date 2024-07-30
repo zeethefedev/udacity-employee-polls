@@ -4,7 +4,7 @@ import { DEFAULT_AVATAR } from "../../utils/utils.user";
 function LeaderRow({ user }) {
   const { id, name, avatarURL, answers, questions } = user;
   return (
-    <tr>
+    <tr data-testid={`user-${user.id}`}>
       <td className="flex w-full gap-2 md:gap-16">
         <img className="w-12 h-12" src={avatarURL || DEFAULT_AVATAR} alt={id} />
         <div className="text-left">
