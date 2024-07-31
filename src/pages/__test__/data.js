@@ -12,3 +12,15 @@ export const SARAH = {
   },
   questions: ["8xf0y6ziyjabvozdd253nd", "am8ehyc8byjqgar0jgpub9"],
 };
+
+export const QUESTION = {
+  author: "sarahedo",
+  optionOneText: "always have a slow Internet connection",
+  optionTwoText: "always be in traffic jams when you drive",
+};
+
+export const ANSWER = {
+  authedUser: "sarahedo",
+  qid: "ty3x4rt0n228sdcnbfof3",
+  answer: "optionTwo",
+};
