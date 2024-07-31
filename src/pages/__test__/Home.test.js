@@ -2,11 +2,20 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import Mock from "./Mock";
 import Home from "../Home";
 import { SARAH } from "./data";
+import QuestionDetail from "../../components/home/QuestionDetail";
+import { Routes, Route } from "react-router-dom";
 
 const MockHome = () => {
   return (
     <Mock>
-      <Home user={SARAH} />
+      <Routes>
+        <Route exact path="/" element={<Home user={SARAH} />}>
+          <Route
+            path="question/:id"
+            element={<QuestionDetail user={SARAH} />}
+          />
+        </Route>
+      </Routes>
     </Mock>
   );
 };
@@ -37,17 +46,23 @@ describe("Home", () => {
     expect(questionListHeading).toBeInTheDocument();
   });
 
-  // it("should allow user to view question detail", async () => {
-  //   render(<MockHome />);
-  //   const [questionCard] = await screen.findAllByTestId("question-card");
-  //   fireEvent.click(questionCard);
+  it("should allow user to view question detail and vote", async () => {
+    render(<MockHome />);
+    const [questionCard] = await screen.findAllByTestId("question-card");
+    const questionId = questionCard.getAttribute("id");
+    fireEvent.click(questionCard);
 
-  //   const questionDetail = await screen.findByTestId("question-details");
-  //   expect(questionDetail).toBeInTheDocument();
-  // });
+    await waitFor(() =>
+      expect(window.location.href).toBe(
+        `http://localhost/question/${questionId}`
+      )
+    );
+    const questionDetail = await screen.findByTestId("question-details");
+    expect(questionDetail).toBeInTheDocument();
+    const optionOneButton = await screen.findByTestId("optionOne");
+    fireEvent.click(optionOneButton);
 
-  // it("should allow user to vote on a question", () => {
-  //   const { home } = render(<MockHome />);
-  //   expect(home).toMatchSnapshot();
-  // });
+    const successMessage = await screen.findByText(/^You voted for/);
+    expect(successMessage).toBeInTheDocument();
+  });
 });
