@@ -24,11 +24,9 @@ function Form(props) {
   const [inputGroup, setInputGroup] = useState(toObject(initialInputs));
 
   const handleChange = (e) => {
-    const newValue = e.target.value;
+    const value = e.target.value;
     const newInputs = inputGroup.map((input) =>
-      input.name === e.target.name
-        ? { ...input, value: newValue, touched: true }
-        : input
+      input.name === e.target.name ? { ...input, value, touched: true } : input
     );
     setInputGroup(newInputs);
   };
