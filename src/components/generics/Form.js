@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
 import Message from "./Message";
-import {
-  toObject,
-  validateConfirmPassword,
-  validatePassword,
-} from "../../utils/utils.user";
+import { toObject } from "../../utils/utils.user";
 import { FORM_ERROR } from "../../utils/utils";
 
 function Form(props) {

@@ -31,23 +31,6 @@ export const toObject = (fieldArray) => {
   }));
 };
 
-export const validatePassword = (input) => {
-  if (/\d/.test(input.value)) {
-    // must include 1 digit
-    return true;
-  } else return;
-};
-
-export const validateConfirmPassword = (inputs) => {
-  const getFieldValue = (fieldName) => {
-    return inputs.find((inp) => inp.name === fieldName)?.value;
-  };
-
-  const newPassword = getFieldValue("password");
-  const confirmPassword = getFieldValue("confirm-password");
-  return confirmPassword === newPassword;
-};
-
 export const getFromStorage = (key) => {
   const item = window.sessionStorage.getItem(key);
   if (item) {
