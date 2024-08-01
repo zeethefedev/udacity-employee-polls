@@ -1,4 +1,3 @@
-import { ERROR, formatUser } from "../utils/utils.user";
 import { formatQuestion, getVotes } from "../utils/utils.question";
 
 let users = {
@@ -145,7 +144,14 @@ export function _getQuestions() {
 
 export function _saveQuestion(question) {
   const { author } = question;
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
+    if (
+      !question.optionOneText ||
+      !question.optionTwoText ||
+      !question.author
+    ) {
+      reject("Please provide optionOneText, optionTwoText, and author");
+    }
     const formattedQuestion = formatQuestion(question);
     setTimeout(() => {
       questions = {
@@ -167,7 +173,11 @@ export function _saveQuestion(question) {
 }
 
 export function _saveQuestionAnswer({ authedUser, qid, answer }) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
+    if (!authedUser || !qid || !answer) {
+      reject("Please provide authedUser, qid, and answer");
+    }
+
     setTimeout(() => {
       users = {
         ...users,
