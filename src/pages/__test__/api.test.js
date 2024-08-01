@@ -1,6 +1,6 @@
 import { waitFor } from "@testing-library/react";
 import { ANSWER, QUESTION } from "./data";
-import { _saveQuestion, _saveQuestionAnswer } from "./_DATA";
+import { _saveQuestion, _saveQuestionAnswer } from "../../api/_DATA";
 
 describe("_saveQuestion", () => {
   it("should return the saved question with correctly formatted data", async () => {
