@@ -143,27 +143,6 @@ export function _getQuestions() {
   });
 }
 
-export function _saveUser(user) {
-  const { username } = user;
-  const userIds = Object.keys(users);
-
-  return new Promise((resolve, reject) => {
-    if (userIds.includes(username)) {
-      reject(ERROR.SIGNUP);
-    }
-
-    const formattedUser = formatUser(user);
-    setTimeout(() => {
-      users = {
-        ...users,
-        [formattedUser.id]: formattedUser,
-      };
-
-      resolve(formattedUser);
-    }, 1000);
-  });
-}
-
 export function _saveQuestion(question) {
   const { author } = question;
   return new Promise((resolve) => {

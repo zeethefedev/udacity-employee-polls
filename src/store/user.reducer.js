@@ -1,5 +1,5 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
-import { getAllUsers, login, signup } from "./user.thunk";
+import { getAllUsers, login } from "./user.thunk";
 import { MESSAGES, getFromStorage } from "../utils/utils.user";
 
 export const userSlice = createSlice({
@@ -37,22 +37,19 @@ export const userSlice = createSlice({
         state.users = users;
         state.loading = false;
       })
-      .addMatcher(isAnyOf(login.pending, signup.pending), (state) => {
+      .addCase(login.pending, (state) => {
         state.error = false;
         state.message = "";
         state.loading = true;
       })
+      .addCase(login.fulfilled, (state, action) => {
+        const { user } = action.payload;
+        state.currentUser = user;
+        state.message = MESSAGES.LOGIN_SUCCESS;
+        state.loading = false;
+      })
       .addMatcher(
-        isAnyOf(login.fulfilled, signup.fulfilled),
-        (state, action) => {
-          const { mode, user } = action.payload;
-          state.currentUser = user;
-          state.message = MESSAGES[`${mode.toUpperCase()}_SUCCESS`];
-          state.loading = false;
-        }
-      )
-      .addMatcher(
-        isAnyOf(login.rejected, signup.rejected, getAllUsers.rejected),
+        isAnyOf(login.rejected, getAllUsers.rejected),
         (state, action) => {
           const { message } = action.error;
           state.error = true;

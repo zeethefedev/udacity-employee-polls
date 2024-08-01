@@ -11,7 +11,6 @@ import {
 
 function Form(props) {
   const {
-    mode,
     heading,
     initialInputs,
     buttonDisabled,
@@ -43,21 +42,7 @@ function Form(props) {
 
   const errorField = (input) => {
     const code = `${input.name.toUpperCase().replaceAll("-", "_")}`;
-    if (input.name === "password") {
-      return (
-        (mode === "login" ? !input.value : !validatePassword(input)) &&
-        input.touched &&
-        FORM_ERROR[`${code}_${mode.toUpperCase()}`]
-      );
-    } else if (input.name === "confirm-password") {
-      return (
-        !validateConfirmPassword(inputGroup) &&
-        input.touched &&
-        FORM_ERROR[code]
-      );
-    } else {
-      return !input.value && input.touched && FORM_ERROR[code];
-    }
+    return !input.value && input.touched && FORM_ERROR[code];
   };
 
   const typeField = (input) => {

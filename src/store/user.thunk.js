@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { _getUsers, _saveUser } from "../api/_DATA";
+import { _getUsers } from "../api/_DATA";
 import { ERROR } from "../utils/utils.user";
 
 //login
@@ -17,19 +17,7 @@ export const login = createAsyncThunk("/login", async (user) => {
       throw Error(ERROR.LOGIN_USERNAME);
     }
   });
-  return { mode: "login", user: userData };
-});
-
-//signup
-export const signup = createAsyncThunk("/signup", async (user) => {
-  const userData = await _saveUser(user)
-    .then((newUser) => {
-      return newUser;
-    })
-    .catch((error) => {
-      throw Error(error);
-    });
-  return { mode: "signup", user: userData };
+  return { user: userData };
 });
 
 export const getAllUsers = createAsyncThunk("/get-users", async () => {

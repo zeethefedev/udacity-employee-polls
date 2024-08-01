@@ -2,7 +2,6 @@ import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import Signup from "./pages/Signup";
 import LeaderBoard from "./pages/LeaderBoard";
 import Add from "./pages/Add";
 import QuestionDetail from "./components/home/QuestionDetail";
@@ -27,7 +26,6 @@ function App() {
           <Route path="add" element={<Add user={currentUser} />} />
         </Route>
         <Route path="login" element={<Login />} />
-        <Route path="signup" element={<Signup />} />
         <Route path="error" element={<Error />} />
       </Routes>
     </div>

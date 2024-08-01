@@ -11,15 +11,13 @@ export const redirect =
   (action) => {
     let actions = [];
     const { type, payload, error } = action;
-    const isLoginSignup = ["login", "signup"].some((actionType) =>
-      type.includes(actionType)
-    );
+    const isLogin = type.includes("login");
 
-    if (isLoginSignup && type.includes("fulfilled")) {
+    if (isLogin && type.includes("fulfilled")) {
       actions = [...actions, redirectTo("/")];
     }
 
-    if (!isLoginSignup && error) return redirectTo("/error");
+    if (!isLogin && error) return redirectTo("/error");
 
     if (type === "/get-question/fulfilled") {
       const author = payload.question.author;
@@ -32,11 +30,9 @@ export const redirect =
 export const handleUserToken = (store) => (next) => (action) => {
   let actions = [];
   const { type, payload, error } = action;
-  const isLoginSignup = ["login", "signup"].some((actionType) =>
-    type.includes(actionType)
-  );
+  const isLogin = type.includes("login");
 
-  if (isLoginSignup) {
+  if (isLogin) {
     if (type.includes("fulfilled")) {
       actions = [...actions, saveToStorage("USER", payload.user)];
     } else if (error) {

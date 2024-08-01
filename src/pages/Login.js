@@ -1,12 +1,9 @@
 import React from "react";
-import LoginSignupForm from "../components/login-signup/LoginSignupForm";
-import { useNavigate } from "react-router-dom";
+import LoginForm from "../components/login/LoginForm";
 import { useDispatch } from "react-redux";
 import { login } from "../store/user.thunk";
-import { resetForm } from "../store/user.reducer";
 
 function Login() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleValidateForm = (inputGroup) => {
@@ -17,11 +14,6 @@ function Login() {
     }
   };
 
-  const handleNavigate = () => {
-    navigate("/signup");
-    dispatch(resetForm());
-  };
-
   const buttonDisabled = (inputGroup) => {
     return (
       inputGroup.every((inp) => inp.touched) &&
@@ -30,10 +22,9 @@ function Login() {
   };
 
   return (
-    <LoginSignupForm
+    <LoginForm
       initialInputs={["username", "password"]}
       handleValidateForm={handleValidateForm}
-      handleNavigate={handleNavigate}
       buttonDisabled={buttonDisabled}
     />
   );
