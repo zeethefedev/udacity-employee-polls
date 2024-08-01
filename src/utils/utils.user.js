@@ -12,7 +12,7 @@ export function formatUser({ username, displayName, password }) {
 export const DEFAULT_AVATAR = "/avatar/default-avatar.svg";
 
 export const ERROR = {
-  LOGIN: "We cannot find the user. Please try again.",
+  LOGIN_USERNAME: "We cannot find the user. Please try again.",
   LOGIN_PASSWORD: "Incorrect password. Please try again.",
   GET_USERS: "Cannot get users",
   GET_USER: "Cannot get user",
