@@ -22,13 +22,20 @@ function LeaderBoard() {
         <Loading />
       ) : (
         <table className="w-full my-16">
-          <tr>
-            <th>Name</th>
-            <th>Answers</th>
-            <th>Questions</th>
-          </tr>
-          {users &&
-            sortedUsers.map((user) => <LeaderRow key={user.id} user={user} />)}
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Answers</th>
+              <th>Questions</th>
+            </tr>
+          </thead>
+          {users && (
+            <tbody>
+              {sortedUsers.map((user) => (
+                <LeaderRow key={user.id} user={user} />
+              ))}
+            </tbody>
+          )}
         </table>
       )}
     </div>
