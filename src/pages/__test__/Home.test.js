@@ -54,13 +54,26 @@ describe("Home", () => {
     );
     const questionDetail = await screen.findByTestId("question-details");
     expect(questionDetail).toBeInTheDocument();
+
     // author
+    const avatar = await screen.findByTestId("avatar");
+    const authorName = avatar.getAttribute("alt");
+    // expect(authorName).toBe(SARAH.id);
+
     // 2 options
     const optionOneButton = await screen.findByTestId("optionOne");
+    expect(optionOneButton).toBeInTheDocument();
+
+    const optionTwoButton = await screen.findByTestId("optionTwo");
+    expect(optionTwoButton).toBeInTheDocument();
+
     fireEvent.click(optionOneButton);
 
+    // vote result
     const successMessage = await screen.findByText(/^You voted for/);
     expect(successMessage).toBeInTheDocument();
-    //percentage
+
+    const percentMessage = await screen.findByText(/employees vote for/);
+    expect(percentMessage).toBeInTheDocument();
   });
 });
