@@ -1,5 +1,5 @@
 import { waitFor } from "@testing-library/react";
-import { ANSWER, QUESTION } from "./data";
+import { ANSWER, QUESTION } from "./data/data";
 import { _saveQuestion, _saveQuestionAnswer } from "../../api/_DATA";
 
 describe("_saveQuestion", () => {

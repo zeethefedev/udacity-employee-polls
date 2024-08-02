@@ -2,11 +2,12 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import Login from "../Login";
 import Mock from "./Mock";
 import { ERROR, MESSAGES } from "../../utils/utils.user";
+import { Route } from "react-router-dom";
 
 const MockLogin = () => {
   return (
     <Mock>
-      <Login />
+      <Route path="/" element={<Login />} />
     </Mock>
   );
 };

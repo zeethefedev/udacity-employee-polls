@@ -2,12 +2,13 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import Mock from "./Mock";
 import Add from "../Add";
 import { MESSAGES } from "../../utils/utils.question";
-import { SARAH } from "./data";
+import { SARAH } from "./data/data";
+import { Route } from "react-router-dom";
 
 const MockAdd = () => {
   return (
     <Mock>
-      <Add user={SARAH} />
+      <Route path="/" element={<Add user={SARAH} />} />
     </Mock>
   );
 };
