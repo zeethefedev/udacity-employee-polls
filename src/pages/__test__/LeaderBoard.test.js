@@ -1,11 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import Mock from "./Mock";
 import LeaderBoard from "../LeaderBoard";
+import { Route } from "react-router-dom";
 
 const MockLeaderBoard = () => {
   return (
     <Mock>
-      <LeaderBoard />
+      <Route path="/" element={<LeaderBoard />} />
     </Mock>
   );
 };
@@ -24,5 +25,8 @@ describe("LeaderBoard", () => {
 
     const [leaderRow] = screen.getAllByTestId(/^user-/);
     expect(leaderRow).toBeInTheDocument();
+    // employee
+    // number of answers
+    // number of questions
   });
 });

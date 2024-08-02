@@ -26,7 +26,7 @@ The tests are executed using the command line above
 | Data         | Username = sarahedo, password = password124                             |
 | Result       | Form displays error message and user is not redirected to the home page |
 
-| Test case    | 3. Home page renders correctly successful                                                  |
+| Test case    | 3. Home page renders correctly                                                             |
 | ------------ | ------------------------------------------------------------------------------------------ |
 | Description  | Verify that home page renders correctly                                                    |
 | Precondition | User is logged in                                                                          |
@@ -42,7 +42,7 @@ The tests are executed using the command line above
 | Data         | N/A                                                                                         |
 | Result       | all questions are fetched when user is at the home page                                     |
 
-| Test case    | 5. Home page show answered/unanswered questions                                                                                                                                        |
+| Test case    | 5. Home page allow user to see either answered or unanswered questions                                                                                                                 |
 | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Description  | Verify that home page can show answered/unanswered questions                                                                                                                           |
 | Precondition | User is logged in                                                                                                                                                                      |
@@ -50,15 +50,15 @@ The tests are executed using the command line above
 | Data         | N/A                                                                                                                                                                                    |
 | Result       | The home page displays questions list for either answered or unanwered questions and user can toggle between showing the answered and unanswered questions.                            |
 
-| Test case    | 6. View question details                                                                                                                 |
-| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| Description  | Verify that user can view questions details                                                                                              |
-| Precondition | User is logged in and is at the home page                                                                                                |
-| Test steps   | At the home page, click on an unaswered questions, check that the questions show the (1) author, (2) the questions and (3) the 2 options |
-| Data         | N/A                                                                                                                                      |
-| Result       | User can view question details                                                                                                           |
+| Test case    | 6. View question details                                                                                      |
+| ------------ | ------------------------------------------------------------------------------------------------------------- |
+| Description  | Verify that user can view questions details                                                                   |
+| Precondition | User is logged in and is at the home page                                                                     |
+| Test steps   | At the home page, click on an unaswered questions, check that the questions show the author and the 2 options |
+| Data         | N/A                                                                                                           |
+| Result       | User can view question details                                                                                |
 
-| Test case    | 7. Question can be fetch individually                                                                                |
+| Test case    | 7. User can view question details                                                                                    |
 | ------------ | -------------------------------------------------------------------------------------------------------------------- |
 | Description  | Verify that user can view questions details                                                                          |
 | Precondition | User is logged in and is at the home page                                                                            |
