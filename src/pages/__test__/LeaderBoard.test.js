@@ -25,5 +25,19 @@ describe("LeaderBoard", () => {
 
     const [leaderRow] = screen.getAllByTestId(/^user-/);
     expect(leaderRow).toBeInTheDocument();
+
+    // employee
+    const [employee] = screen.getAllByTestId(/^avatar-/);
+    expect(employee).toBeInTheDocument();
+
+    // number of answers
+    const [answer] = screen.getAllByTestId(/^answer-/);
+    const answerContent = answer.textContent;
+    expect(answerContent).toMatch(/^\d+$/);
+
+    // number of questions
+    const [question] = screen.getAllByTestId(/^question-/);
+    const questionContent = question.textContent;
+    expect(questionContent).toMatch(/^\d+$/);
   });
 });

@@ -45,6 +45,7 @@ function QuestionDetail({ user }) {
             className="w-48 h-48"
             src={author.avatarURL || DEFAULT_AVATAR}
             alt={question.author}
+            data-testid="avatar"
           />
           <h2>Would your rather...</h2>
           <div className="flex gap-2">
