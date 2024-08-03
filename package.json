@@ -22,7 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "test-full": "concurrently \"npm test\" \"json-server --watch db.json --port 3001\"",
+    "test-main": "concurrently \"npm test\" \"json-server --watch db.json --port 3001\"",
     "full": "concurrently \"npm start\" \"json-server --watch db.json --port 3001\""
   },
   "eslintConfig": {

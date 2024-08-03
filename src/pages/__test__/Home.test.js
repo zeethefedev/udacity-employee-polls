@@ -57,8 +57,7 @@ describe("Home", () => {
 
     // author
     const avatar = await screen.findByTestId("avatar");
-    const authorName = avatar.getAttribute("alt");
-    // expect(authorName).toBe(SARAH.id);
+    expect(avatar).toBeInTheDocument();
 
     // 2 options
     const optionOneButton = await screen.findByTestId("optionOne");
