@@ -34,7 +34,10 @@ function QuestionDetail({ user }) {
   };
 
   return (
-    <Card className="question-card m-auto my-16 max-w-xl">
+    <Card
+      className="question-card m-auto my-16 max-w-xl"
+      testId="question-details"
+    >
       {question && (
         <>
           <div>{question.author} asked</div>
@@ -42,11 +45,16 @@ function QuestionDetail({ user }) {
             className="w-48 h-48"
             src={author.avatarURL || DEFAULT_AVATAR}
             alt={question.author}
+            data-testid="avatar"
           />
           <h2>Would your rather...</h2>
           <div className="flex gap-2">
             {["optionOne", "optionTwo"].map((option) => (
-              <Button key={option} onClick={() => handleSetAnswer(option)}>
+              <Button
+                key={option}
+                onClick={() => handleSetAnswer(option)}
+                testId={option}
+              >
                 {question[option].text}
               </Button>
             ))}

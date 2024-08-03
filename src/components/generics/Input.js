@@ -15,6 +15,7 @@ function Input(props) {
     onChange,
     inputClass = "w-full",
     wrapperClass = "flex flex-col w-full",
+    testId,
   } = props;
 
   const [showPassword, setShowPassword] = useState(false);
@@ -41,6 +42,7 @@ function Input(props) {
             disabled={disabled}
             onChange={onChange}
             autoComplete="on"
+            data-testid={testId}
           />
           {type === "password" && (
             <Button
