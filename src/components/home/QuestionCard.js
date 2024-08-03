@@ -12,8 +12,10 @@ function QuestionCard({ question }) {
 
   return (
     <Card
+      id={question.id}
       className="question-card clickable max-w-md m-auto h-full"
       onClick={handleNavigate}
+      testId="question-card"
     >
       <div>
         Would your rather <span className="option-text">{optionOne.text}</span>{" "}
