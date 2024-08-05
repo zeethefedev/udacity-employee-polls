@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUsers } from "../store/user.thunk";
-import LeaderRow from "../components/leaderboard/LeaderRow";
-import { sortByQuestionAnswer } from "../utils/utils.question";
-import Loading from "../components/generics/Loading";
+import { getAllUsers } from "../../store/user.thunk";
+import { sortByQuestionAnswer } from "../../utils/utils.question";
+import Loading from "../../components/Loading";
+import LeaderRow from "./LeaderRow";
 
 function LeaderBoard() {
   const dispatch = useDispatch();

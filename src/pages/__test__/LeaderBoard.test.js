@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import Mock from "./Mock";
-import LeaderBoard from "../LeaderBoard";
 import { Route } from "react-router-dom";
+import LeaderBoard from "../leaderboard/LeaderBoard";
 
 const MockLeaderBoard = () => {
   return (

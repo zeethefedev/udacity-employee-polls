@@ -1,6 +1,6 @@
 import React from "react";
-import Card from "../generics/Card";
 import { useNavigate } from "react-router-dom";
+import Card from "../../components/Card";
 
 function QuestionCard({ question }) {
   const { author, timestamp, optionOne, optionTwo } = question;

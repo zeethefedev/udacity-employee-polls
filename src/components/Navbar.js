@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Button from "./generics/Button";
 import { useDispatch } from "react-redux";
-import { logout } from "../store/user.reducer";
 import { Link } from "react-router-dom";
-import SVGIcon from "./generics/SVGIcon";
+import { logout } from "../store/user.reducer";
+import Button from "./Button";
+import SVGIcon from "./SVGIcon";
 import { DEFAULT_AVATAR } from "../utils/utils.user";
 
 const PAGES = ["home", "leaderboard", "add"];

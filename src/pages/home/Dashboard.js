@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import QuestionCard from "./QuestionCard";
-import Input from "../generics/Input";
 import { Outlet, useLocation } from "react-router-dom";
-import { questionHasVote, sortByTimestamp } from "../../utils/utils.question";
 import { useSelector } from "react-redux";
-import Loading from "../generics/Loading";
+import QuestionCard from "./QuestionCard";
+import { questionHasVote, sortByTimestamp } from "../../utils/utils.question";
+import Input from "../../components/Input";
+import Loading from "../../components/Loading";
 
 function QuestionList({ questions }) {
   return (

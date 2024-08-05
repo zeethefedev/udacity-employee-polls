@@ -1,7 +1,7 @@
 import React from "react";
-import Form from "../generics/Form";
 import { useDispatch, useSelector } from "react-redux";
 import { addQuestion } from "../../store/question.thunk";
+import Form from "../../components/Form";
 
 function AddForm({ initialInputs, user }) {
   const errorForm = useSelector((state) => state.question.error);

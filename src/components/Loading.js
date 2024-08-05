@@ -1,5 +1,5 @@
 import React from "react";
-import "../../style/generics.css";
+import "./Loading.css";
 
 function Loading() {
   return <span className="loader m-auto"></span>;
