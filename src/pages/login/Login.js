@@ -1,7 +1,7 @@
 import React from "react";
-import LoginForm from "../components/login/LoginForm";
 import { useDispatch } from "react-redux";
-import { login } from "../store/user.thunk";
+import LoginForm from "./LoginForm";
+import { login } from "../../store/user.thunk";
 
 function Login() {
   const dispatch = useDispatch();

@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import Form from "../generics/Form";
+import Form from "../../components/Form";
 
 function LoginForm({ initialInputs, buttonDisabled, handleValidateForm }) {
   const errorForm = useSelector((state) => state.user.error);
