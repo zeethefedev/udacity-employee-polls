@@ -1,5 +1,5 @@
 import React from "react";
-import AddForm from "../components/add/AddForm";
+import AddForm from "./AddForm";
 
 function Add({ user }) {
   return (

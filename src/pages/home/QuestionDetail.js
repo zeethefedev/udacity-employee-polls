@@ -1,19 +1,19 @@
 import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import Button from "../generics/Button";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getQuestionById,
-  updateQuestionAnswer,
-} from "../../store/question.thunk";
 import {
   getAnswerStatistics,
   getAnswerText,
   questionHasVote,
 } from "../../utils/utils.question";
-import Card from "../generics/Card";
-import Loading from "../generics/Loading";
+import {
+  getQuestionById,
+  updateQuestionAnswer,
+} from "../../store/question.thunk";
+import Card from "../../components/Card";
 import { DEFAULT_AVATAR } from "../../utils/utils.user";
+import Button from "../../components/Button";
+import Loading from "../../components/Loading";
 
 function QuestionDetail({ user }) {
   const { id } = useParams();

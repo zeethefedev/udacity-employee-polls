@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import Dashboard from "../components/home/Dashboard";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllQuestions } from "../store/question.thunk";
+import Dashboard from "./Dashboard";
+import { getAllQuestions } from "../../store/question.thunk";
 
 function Home({ user }) {
   const dispatch = useDispatch();

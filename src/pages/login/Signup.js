@@ -1,10 +1,10 @@
 import React from "react";
-import LoginSignupForm from "../components/login-signup/LoginSignupForm";
-import { validateSignupForm } from "../utils/utils.user";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { signup } from "../store/user.thunk";
-import { resetForm } from "../store/user.reducer";
+import { validateSignupForm } from "../../utils/utils.user";
+import { signup } from "../../store/user.thunk";
+import { resetForm } from "../../store/user.reducer";
+import LoginSignupForm from "./LoginSignupForm";
 
 function Signup() {
   const dispatch = useDispatch();

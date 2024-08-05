@@ -1,9 +1,9 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import Mock from "./Mock";
-import Home from "../Home";
-import { SARAH } from "./data/data";
-import QuestionDetail from "../../components/home/QuestionDetail";
 import { Route } from "react-router-dom";
+import Home from "../home/Home";
+import QuestionDetail from "../home/QuestionDetail";
+import { SARAH } from "./data/data";
 
 const MockHome = () => {
   return (

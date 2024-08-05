@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import Form from "../generics/Form";
-import Button from "../generics/Button";
+import Form from "../../components/Form";
+import Button from "../../components/Button";
 import { MESSAGES } from "../../utils/utils.user";
 
 function LoginSignupForm({

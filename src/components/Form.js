@@ -6,8 +6,8 @@ import {
   toObject,
   validateConfirmPassword,
   validatePassword,
-} from "../../utils/utils.user";
-import { FORM_ERROR } from "../../utils/utils";
+} from "../utils/utils.user";
+import { FORM_ERROR } from "../utils/utils";
 
 function Form(props) {
   const {
