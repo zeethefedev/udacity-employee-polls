@@ -47,7 +47,7 @@ function Dashboard({ questions, user }) {
       />
       {showAnswered ? (
         <>
-          <h1>Answered Questions</h1>
+          <h1 className="text-center">Answered Questions</h1>
           {loading ? (
             <Loading />
           ) : (
@@ -56,7 +56,7 @@ function Dashboard({ questions, user }) {
         </>
       ) : (
         <>
-          <h1>Unanswered Questions</h1>
+          <h1 className="text-center">Unanswered Questions</h1>
           {loading ? (
             <Loading />
           ) : (
