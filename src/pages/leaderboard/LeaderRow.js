@@ -15,8 +15,12 @@ function LeaderRow({ user }) {
           <div>{id}</div>
         </div>
       </td>
-      <td data-testid={`answer-${user.id}`}>{Object.keys(answers).length}</td>
-      <td data-testid={`question-${user.id}`}>{questions.length}</td>
+      <td data-testid={`answer-${user.id}`} className="text-center">
+        {Object.keys(answers).length}
+      </td>
+      <td data-testid={`question-${user.id}`} className="text-center">
+        {questions.length}
+      </td>
     </tr>
   );
 }
