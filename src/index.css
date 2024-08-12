@@ -13,6 +13,7 @@ body {
   --dark-blue: #1f1d82;
   --text-blue: #3d3ace;
   --background: rgba(96, 93, 236, 0.1);
+  --background2: rgba(96, 93, 236, 0.5);
   --hot-pink: #ea1064;
 }
 
@@ -73,6 +74,10 @@ button:focus,
 .input-wrapper:focus {
   box-shadow: 2px 2px var(--dark-blue);
   transform: translate(-2px, -2px);
+}
+
+.button-selected {
+  background-color: var(--background2);
 }
 
 .primary-button {

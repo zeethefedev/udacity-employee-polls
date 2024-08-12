@@ -63,11 +63,12 @@ export const getAnswerStatistics = (question) => {
   return `${votesOne} (${answerPercentOne}%) employees vote for ${textOne} and ${votesTwo} (${answerPercentTwo}%) employees vote for ${textTwo}.`;
 };
 
-export const getAnswerText = (question, user) => {
+export const getAnswer = (question, user) => {
   const one = question.optionOne;
   const two = question.optionTwo;
-  if (one.votes.includes(user.id)) return one.text;
-  else return two.text;
+  if (one.votes.includes(user.id))
+    return { answer: "optionOne", text: one.text };
+  else return { answer: "optionTwo", text: two.text };
 };
 
 export const getVotes = (questions, authedUser, qid, answer) => {
