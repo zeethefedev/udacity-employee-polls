@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  getAnswer,
   getAnswerStatistics,
-  getAnswerText,
   questionHasVote,
 } from "../../utils/utils.question";
 import {
@@ -22,6 +22,7 @@ function QuestionDetail({ user }) {
   const author = useSelector((state) => state.question.author);
   const loading = useSelector((state) => state.question.loading);
   const isQuestionsAnswered = question && questionHasVote(question, user);
+  const selected = isQuestionsAnswered && getAnswer(question, user);
 
   useEffect(() => {
     dispatch(getQuestionById(id));
@@ -51,6 +52,7 @@ function QuestionDetail({ user }) {
           <div className="flex gap-2">
             {["optionOne", "optionTwo"].map((option) => (
               <Button
+                selected={selected?.answer === option}
                 key={option}
                 onClick={() => handleSetAnswer(option)}
                 testId={option}
@@ -60,8 +62,8 @@ function QuestionDetail({ user }) {
             ))}
           </div>
           {isQuestionsAnswered && (
-            <div className="flex flex-col gap-2">
-              <div>{`You voted for ${getAnswerText(question, user)}`} </div>
+            <div className="flex flex-col gap-2 text-center">
+              <div>{`You voted for ${selected.text}`} </div>
               <div>{getAnswerStatistics(question)}</div>
               <Link to="/">Back to home</Link>
             </div>
