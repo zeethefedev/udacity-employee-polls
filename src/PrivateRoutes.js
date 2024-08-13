@@ -3,7 +3,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { useDispatch } from "react-redux";
 import { logout, setUser } from "./store/user.reducer";
-import { getFromStorage } from "./utils/utils.user";
+import { getFromStorage, saveToStorage } from "./utils/utils.user";
 
 function PrivateRoutes({ user }) {
   const dispatch = useDispatch();
@@ -12,6 +12,8 @@ function PrivateRoutes({ user }) {
 
   useEffect(() => {
     dispatch(setUser());
+    const current = getFromStorage("CURRENT");
+    current && navigate(current);
   }, []);
 
   useEffect(() => {
@@ -20,10 +22,13 @@ function PrivateRoutes({ user }) {
 
   useEffect(() => {
     const { key, pathname } = location;
-    if (key === "default" && pathname !== "/") {
-      dispatch(logout());
-      navigate("/login");
+    if (key === "default") {
+      if (pathname !== "/") {
+        dispatch(logout());
+        navigate("/login");
+      }
     }
+    saveToStorage("CURRENT", pathname);
   }, [location]);
 
   return (
