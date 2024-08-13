@@ -4,7 +4,8 @@ export const ERROR = {
   ADD_QUESTION: "Cannot add question. Please try again",
 };
 export const MESSAGES = {
-  ADD_QUESTION_SUCCESS: "Question added successfully",
+  ADD_QUESTION_SUCCESS:
+    "Question added successfully. Hang on while we redirect you.",
 };
 
 function generateUID() {

@@ -2,12 +2,14 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addQuestion } from "../../store/question.thunk";
 import Form from "../../components/Form";
+import { useNavigate } from "react-router-dom";
 
 function AddForm({ initialInputs, user }) {
   const errorForm = useSelector((state) => state.question.error);
   const message = useSelector((state) => state.question.message);
   const loading = useSelector((state) => state.question.loading);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleValidateForm = (inputGroup) => {
     const validForm = inputGroup.every((input) => input.value && input.touched);
@@ -16,7 +18,9 @@ function AddForm({ initialInputs, user }) {
         (input) => input.value
       );
       const newQuestion = { author: user.id, optionOneText, optionTwoText };
-      dispatch(addQuestion(newQuestion));
+      dispatch(addQuestion(newQuestion))
+        .unwrap()
+        .then(() => navigate("/"));
     }
   };
 
