@@ -26,8 +26,12 @@ function PrivateRoutes({ user }) {
 
   useEffect(() => {
     const { key, pathname } = location;
+    //get previous pathname
+    const savedPathname = getCurrentPageFromStorage();
+
+    //save current pathname
     saveCurrentPageToStorage(pathname);
-    if (key === "default") {
+    if (key === "default" || savedPathname === pathname) {
       if (pathname !== "/") {
         dispatch(logout());
         navigate("/login");
