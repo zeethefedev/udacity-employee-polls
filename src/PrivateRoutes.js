@@ -22,13 +22,13 @@ function PrivateRoutes({ user }) {
 
   useEffect(() => {
     const { key, pathname } = location;
+    saveToStorage("CURRENT", pathname);
     if (key === "default") {
       if (pathname !== "/") {
         dispatch(logout());
         navigate("/login");
       }
     }
-    saveToStorage("CURRENT", pathname);
   }, [location]);
 
   return (

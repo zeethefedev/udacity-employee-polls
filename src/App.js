@@ -28,6 +28,7 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route path="error" element={<Error />} />
+        <Route path="*" element={<Error />} />
       </Routes>
     </div>
   );
