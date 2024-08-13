@@ -17,7 +17,7 @@ function App() {
         <Route element={<PrivateRoutes user={currentUser} />}>
           <Route exact path="/" element={<Home user={currentUser} />}>
             <Route
-              path="question/:id"
+              path="questions/:id"
               element={<QuestionDetail user={currentUser} />}
             />
           </Route>

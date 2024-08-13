@@ -9,7 +9,7 @@ const MockHome = () => {
   return (
     <Mock>
       <Route exact path="/" element={<Home user={SARAH} />}>
-        <Route path="question/:id" element={<QuestionDetail user={SARAH} />} />
+        <Route path="questions/:id" element={<QuestionDetail user={SARAH} />} />
       </Route>
     </Mock>
   );
@@ -49,7 +49,7 @@ describe("Home", () => {
 
     await waitFor(() =>
       expect(window.location.href).toBe(
-        `http://localhost/question/${questionId}`
+        `http://localhost/questions/${questionId}`
       )
     );
     const questionDetail = await screen.findByTestId("question-details");
