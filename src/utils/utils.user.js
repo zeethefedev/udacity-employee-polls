@@ -49,3 +49,16 @@ export const clearStorage = (key) => {
     sessionStorage.clear();
   }
 };
+
+export const getCurrentPageFromStorage = () => {
+  const item = window.localStorage.getItem("CURRENT");
+  return item && JSON.parse(item);
+};
+
+export const saveCurrentPageToStorage = (item) => {
+  window.localStorage.setItem("CURRENT", JSON.stringify(item));
+};
+
+export const clearCurrentPageFromStorage = () => {
+  localStorage.removeItem("CURRENT");
+};
