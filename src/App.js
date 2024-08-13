@@ -26,6 +26,7 @@ function App() {
         </Route>
         <Route path="login" element={<Login />} />
         <Route path="error" element={<Error />} />
+        <Route path="*" element={<Error />} />
       </Routes>
     </div>
   );
