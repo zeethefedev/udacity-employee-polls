@@ -7,7 +7,7 @@ function QuestionCard({ question }) {
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    navigate(`question/${question.id}`);
+    navigate(`questions/${question.id}`);
   };
 
   return (
