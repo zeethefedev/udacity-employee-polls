@@ -3,7 +3,11 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { useDispatch } from "react-redux";
 import { logout, setUser } from "./store/user.reducer";
-import { getFromStorage, saveToStorage } from "./utils/utils.user";
+import {
+  getCurrentPageFromStorage,
+  getFromStorage,
+  saveCurrentPageToStorage,
+} from "./utils/utils.user";
 
 function PrivateRoutes({ user }) {
   const dispatch = useDispatch();
@@ -12,7 +16,7 @@ function PrivateRoutes({ user }) {
 
   useEffect(() => {
     dispatch(setUser());
-    const current = getFromStorage("CURRENT");
+    const current = getCurrentPageFromStorage();
     current && navigate(current);
   }, []);
 
@@ -22,7 +26,7 @@ function PrivateRoutes({ user }) {
 
   useEffect(() => {
     const { key, pathname } = location;
-    saveToStorage("CURRENT", pathname);
+    saveCurrentPageToStorage(pathname);
     if (key === "default") {
       if (pathname !== "/") {
         dispatch(logout());

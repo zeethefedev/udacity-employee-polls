@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { clearStorage } from "../utils/utils.user";
+import { clearCurrentPageFromStorage } from "../utils/utils.user";
 
 function Error() {
   const handleClickHomelink = () => {
-    clearStorage("CURRENT");
+    clearCurrentPageFromStorage();
   };
   return (
     <div className="p-6 md:px-28 md:py-11">
